@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('layouts/header'); -%>
+  <body>
+    <%- include('layouts/navbar'); -%>
+
+    <!-- Main Content -->
+
+    <div class="main-div">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="overlay">
+          <h1>Welcome to Your Driving Test Portal!</h1>
+          <h3>Book your G and G2 driving tests easily.</h3>
+          <a href="/login" class="btn btn-primary">Get Started</a>
+        </div>
+      </section>
+      <div class="dashboard-main-div">
+        <!-- Key Features Section -->
+        <section class="features text-center my-3">
+          <div class="container dashboard-card-div">
+            <h1>Key Features</h1>
+            <div class="dashboard-main-card-div">
+              <div class="dashboard-card">
+                <img
+                  src="/images/booking-icon.jpg"
+                  alt="Easy Booking"
+                  class="dashboard-image-style"
+                />
+                <h3>Easy Booking</h3>
+                <p>Schedule your test at your convenience.</p>
+              </div>
+              <div class="dashboard-card">
+                <img
+                  src="/images/user-friendly-icon.jpg"
+                  alt="User-Friendly"
+                  class="dashboard-image-style"
+                />
+                <h3>User-Friendly Interface</h3>
+                <p>Navigate through our intuitive platform effortlessly.</p>
+              </div>
+              <div class="dashboard-card">
+                <img
+                  src="/images/confirmation-icon.jpg"
+                  alt="Instant Confirmation"
+                  class="dashboard-image-style"
+                />
+                <h3>Instant Confirmation</h3>
+                <p>Receive instant confirmation of your booking.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Testimonials Section -->
+      <section class="testimonials text-center">
+        <div class="container testimonials-container">
+          <h1>What Our Users Say</h1>
+          <div class="testimonial-carousel">
+            <p>"The booking process was a breeze!" – Jane D.</p>
+            <p>
+              "I got my G2 license easily, thanks to this portal!" – Mark T.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="call-to-action text-center">
+        <h2>Ready to book your test?</h2>
+        <a href="/login" class="btn btn-success">Book Now</a>
+      </section>
+    </div>
+
+    <%- include('layouts/footer'); -%> <%- include('layouts/scripts'); -%>
+  </body>
+</html>

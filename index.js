@@ -1,23 +1,30 @@
-const express = require('express');
-const path = require('path');
-const app = express();
+const express = require("express");
 
-app.use(express.static('public'));
+const app = new express();
+app.use(express.static("public"));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => {
+  res.render("dashboard", {
+    title: "Dashboard | Manage Your G and G2 Drive Test Bookings",
+  });
 });
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+app.get("/login", (req, res) => {
+  res.render("login", { title: "Login | Access Your Drive Test Account" });
 });
 
-app.get('/g2', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'g2_page.html'));
+app.get("/g2", (req, res) => {
+  res.render("g2_page", {
+    title: "G2 Test Booking | Schedule Your G2 License Test",
+  });
 });
 
-app.get('/g', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'g_page.html'));
+app.get("/g", (req, res) => {
+  res.render("g_page", {
+    title: "G Test Booking | Apply for Your G License Exam",
+  });
 });
 
 const PORT = process.env.PORT || 3000;
