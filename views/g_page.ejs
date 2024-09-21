@@ -6,12 +6,48 @@
 
     <!-- Main Content -->
 
-    <div class="login-main-div">
-      <h1>G Page</h1>
-      <h2>Working on it</h2>
-    </div>
-    
-    <%- include('layouts/footer'); -%> 
-    <%- include('layouts/scripts'); -%>
+    <main class="g-page-main-div-style">
+      <div class="background-container">
+        <div class="overlay-style"></div>
+        <div class="content-wrapper">
+          <!-- Introductory Text -->
+          <div class="intro-text">
+            <h1>Welcome to the G Test Data Retrieval Portal</h1>
+            <h3>
+              Enter your License Number below to retrieve your details from the
+              database.
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="g-page-container">
+        <div class="g-page-form-container">
+          <h2 class="text-center">Retrieve Your Information</h2>
+
+          <form class="g-page-form" id="gPageForm">
+            <div class="form-group">
+              <label for="licenseNumber">License Number</label>
+              <input
+                type="text"
+                class="form-control"
+                id="licenseNumber"
+                placeholder="Enter your License Number"
+                required
+              />
+              <span id="licenseError" class="error-message"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-2">
+              <button type="submit" class="btn btn-primary btn-lg">
+                Retrieve Data
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <%- include('layouts/footer'); -%> <%- include('layouts/scripts'); -%>
   </body>
 </html>

@@ -5,13 +5,57 @@
     <%- include('layouts/navbar'); -%>
 
     <!-- Main Content -->
+    <main class="login-main-div">
+      <div class="login-background-container">
+        <div class="login-overlay-style"></div>
+        <div class="login-intro-text">
+          <h1>Login Page</h1>
+          <h3>This page is currently under construction.</h3>
+          <h3>
+            We will soon offer both sign up and login functionality on this
+            page.
+          </h3>
+        </div>
+      </div>
+      <div class="login-container">
+        <div class="login-form-container">
+          <h2 class="text-center">Login</h2>
 
-    <div class="login-main-div">
-      <h1>Login Page</h1>
-      <h2>Working on it</h2>
-    </div>
-    
-    <%- include('layouts/footer'); -%> 
-    <%- include('layouts/scripts'); -%>
+          <form class="login-form" id="loginForm">
+            <div class="login-form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Enter your username"
+                disabled
+              />
+            </div>
+
+            <div class="login-form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Enter your password"
+                disabled
+              />
+            </div>
+
+            <div class="text-center mt-2">
+              <button type="submit" class="btn btn-primary btn-lg" disabled>
+                Login
+              </button>
+            </div>
+          </form>
+
+          <p class="mt-4 text-center">Stay tuned for updates!</p>
+        </div>
+      </div>
+    </main>
+
+    <%- include('layouts/footer'); -%> <%- include('layouts/scripts'); -%>
   </body>
 </html>
