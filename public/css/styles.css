@@ -364,6 +364,10 @@ button:hover {
 
 /* G Page Style */
 
+.g-page-main-div-style{
+  margin: 4rem 0rem;
+}
+
 .g-page-container {
   display: flex;
   align-items: center;
