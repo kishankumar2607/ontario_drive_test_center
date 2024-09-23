@@ -317,6 +317,7 @@ label {
 }
 
 input[type="text"],
+input[type="password"],
 input[type="number"],
 input[type="date"] {
   width: 100%;
@@ -328,9 +329,9 @@ input[type="date"] {
 }
 
 input:focus {
-  border-color: #ff0000 !important;
+  border-color: #0998ff !important;
   outline: none;
-  box-shadow: 0 0 8px rgba(234, 130, 130, 0.3) !important;
+  box-shadow: 0 0 8px rgba(130, 199, 234, 0.3) !important;
 }
 
 button {
