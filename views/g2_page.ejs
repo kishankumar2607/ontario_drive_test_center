@@ -3,7 +3,7 @@
   <!-- Header -->
   <%- include('layouts/header'); -%>
   <body>
-      <!-- Navbar -->
+    <!-- Navbar -->
     <%- include('layouts/navbar'); -%>
 
     <!-- Main Content -->
@@ -28,7 +28,7 @@
           <h2 class="text-center">G2 Test Booking Form</h2>
 
           <!-- G2 Test Booking Form -->
-          <form class="g2-test-form" id="g2Form" novalidate>
+          <form class="g2-test-form" id="g2Form" action="/g2" method="POST" novalidate>
             <!-- Personal Information Section -->
             <div class="section">
               <h2>Personal Information</h2>
@@ -40,6 +40,7 @@
                   type="text"
                   class="form-control"
                   id="firstName"
+                  name="firstname"
                   placeholder="Enter First Name"
                   required
                 />
@@ -54,6 +55,7 @@
                   type="text"
                   class="form-control"
                   id="lastName"
+                  name="lastname"
                   placeholder="Enter Last Name"
                   required
                 />
@@ -68,6 +70,7 @@
                   type="text"
                   class="form-control"
                   id="licenseNumber"
+                  name="licenseNumber"
                   placeholder="Enter License Number (8 characters)"
                   minlength="8"
                   maxlength="8"
@@ -84,6 +87,7 @@
                   type="number"
                   class="form-control"
                   id="age"
+                  name="age"
                   placeholder="Enter Age"
                   required
                 />
@@ -94,7 +98,13 @@
                 <label for="dob"
                   >Date of Birth <span class="required">*</span></label
                 >
-                <input type="date" class="form-control" id="dob" required />
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dob"
+                  name="dob"
+                  required
+                />
                 <span id="dobError" class="error-message"></span>
               </div>
             </div>
@@ -110,6 +120,7 @@
                   type="text"
                   class="form-control"
                   id="carMake"
+                  name="carMake"
                   placeholder="Car Make"
                   required
                 />
@@ -124,6 +135,7 @@
                   type="text"
                   class="form-control"
                   id="carModel"
+                  name="carModel"
                   placeholder="Car Model"
                   required
                 />
@@ -138,6 +150,7 @@
                   type="number"
                   class="form-control"
                   id="carYear"
+                  name="carYear"
                   placeholder="Car Year"
                   min="1900"
                   max="2024"
@@ -154,6 +167,7 @@
                   type="text"
                   class="form-control"
                   id="plateNumber"
+                  name="plateNumber"
                   placeholder="Car Plate Number"
                   required
                 />

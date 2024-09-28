@@ -1,33 +1,13 @@
-const express = require("express");
 
-const app = new express();
-app.use(express.static("public"));
+const express = require('express');
+require("./helper/connection")
+const app = express();
+const server = require("./server")
 
-app.set("view engine", "ejs");
+app.use(server);
 
-app.get("/", (req, res) => {
-  res.render("dashboard", {
-    title: "Dashboard | Manage Your G and G2 Drive Test Bookings",
-  });
-});
+const PORT = 3000;
 
-app.get("/login", (req, res) => {
-  res.render("login", { title: "Login | Access Your Drive Test Account" });
-});
-
-app.get("/g2", (req, res) => {
-  res.render("g2_page", {
-    title: "G2 Test Booking | Schedule Your G2 License Test",
-  });
-});
-
-app.get("/g", (req, res) => {
-  res.render("g_page", {
-    title: "G Test Booking | Apply for Your G License Exam",
-  });
-});
-
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
