@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 
-const uri = "mongodb+srv://kdas5646:Kishan%402607@kishandb.iyeze.mongodb.net/?retryWrites=true&w=majority&appName=KishanDB";
+const uri = "mongodb+srv://kdas5646:Kishan%402607@kishandb.iyeze.mongodb.net/KishanDB?retryWrites=true&w=majority&appName=KishanDB";
 
 // Database connection with MongoDB
 mongoose

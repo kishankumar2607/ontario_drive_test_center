@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Header -->
+  <%- include('layouts/header'); -%>
+  <body>
+    <!-- Navbar -->
+    <%- include('layouts/navbar'); -%>
+
+    <!-- Main Content -->
+    <main class="g-page-main-div-style">
+      <div class="g-page-container">
+        <div class="user-data-container">
+          <h2 class="text-center">User Information</h2>
+
+          <p><strong>Name:</strong> <%= user.name %></p>
+          <p><strong>Email:</strong> <%= user.email %></p>
+          <p><strong>License Number:</strong> <%= user.licenseNumber %></p>
+
+          <h4>Car Information</h4>
+          <p><strong>Make:</strong> <%= user.car.make %></p>
+          <p><strong>Model:</strong> <%= user.car.model %></p>
+
+          <!-- Form to Update Car Information -->
+          <h4>Update Car Information</h4>
+          <form action="/g/update" method="POST">
+            <input type="hidden" name="userId" value="<%= user._id %>" /> <!-- Pass user ID -->
+            <div class="form-group">
+              <label for="carMake">Car Make</label>
+              <input
+                type="text"
+                class="form-control"
+                id="carMake"
+                name="carMake"
+                value="<%= user.car.make %>"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="carModel">Car Model</label>
+              <input
+                type="text"
+                class="form-control"
+                id="carModel"
+                name="carModel"
+                value="<%= user.car.model %>"
+                required
+              />
+            </div>
+            <div class="text-center mt-2">
+              <button type="submit" class="btn btn-success btn-lg">
+                Update Car Information
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <%- include('layouts/footer'); -%>
+  </body>
+</html>

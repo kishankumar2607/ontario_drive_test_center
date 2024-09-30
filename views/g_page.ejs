@@ -26,13 +26,14 @@
         <div class="g-page-form-container">
           <h2 class="text-center">Retrieve Your Information</h2>
 
-          <form class="g-page-form" id="gPageForm">
+          <form class="g-page-form" id="gPageForm" action="/user-data" method="POST">
             <div class="form-group">
               <label for="licenseNumber">License Number</label>
               <input
                 type="text"
                 class="form-control"
                 id="licenseNumber"
+                name="licenseNumber"
                 placeholder="Enter your License Number"
                 required
               />

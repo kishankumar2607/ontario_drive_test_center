@@ -1,12 +1,13 @@
-// models/User.js
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
-  firstname: {
+const Schema = mongoose.Schema;
+
+const UserSchema = new Schema({
+  firstName: {
     type: String,
     required: true,
   },
-  lastname: {
+  lastName: {
     type: String,
     required: true,
   },
@@ -19,24 +20,26 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   dob: {
-    type: Number,
+    type: Date,
     required: true,
   },
-  make: {
-    type: String,
-    required: true,
-  },
-  model: {
-    type: String,
-    required: true,
-  },
-  year: {
-    type: String,
-    required: true,
-  },
-  platno: {
-    type: String,
-    required: true,
+  car_details: {
+    make: {
+      type: String,
+      required: true,
+    },
+    model: {
+      type: String,
+      required: true,
+    },
+    year: {
+      type: String,
+      required: true,
+    },
+    plateNumber: {
+      type: String,
+      required: true,
+    },
   },
 });
 
