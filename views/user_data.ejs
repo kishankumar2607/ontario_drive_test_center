@@ -1,60 +1,74 @@
-<!DOCTYPE html>
 <html lang="en">
   <!-- Header -->
-  <%- include('layouts/header'); -%>
+  <%- include('layouts/header', { title: 'User Information' }); -%>
   <body>
     <!-- Navbar -->
     <%- include('layouts/navbar'); -%>
 
-    <!-- Main Content -->
-    <main class="g-page-main-div-style">
-      <div class="g-page-container">
-        <div class="user-data-container">
-          <h2 class="text-center">User Information</h2>
+    <div class="user-data-main-div">
+      <div class="user-data-inner-div container">
+        <h2 class="text-center">User Information</h2>
 
-          <p><strong>Name:</strong> <%= user.name %></p>
-          <p><strong>Email:</strong> <%= user.email %></p>
-          <p><strong>License Number:</strong> <%= user.licenseNumber %></p>
+        <p><strong>Name:</strong> <%= user.firstName %> <%= user.lastName %></p>
+        <p><strong>Email:</strong> <%= user.email %></p>
+        <p><strong>License Number:</strong> <%= user.licenseNumber %></p>
+        <p><strong>Age:</strong> <%= user.age %></p>
+        <p><strong>Date of Birth:</strong> <%= user.dob.toDateString() %></p>
 
-          <h4>Car Information</h4>
-          <p><strong>Make:</strong> <%= user.car.make %></p>
-          <p><strong>Model:</strong> <%= user.car.model %></p>
+        <!-- Car Information (Editable) -->
 
-          <!-- Form to Update Car Information -->
-          <h4>Update Car Information</h4>
-          <form action="/g/update" method="POST">
-            <input type="hidden" name="userId" value="<%= user._id %>" /> <!-- Pass user ID -->
-            <div class="form-group">
-              <label for="carMake">Car Make</label>
-              <input
-                type="text"
-                class="form-control"
-                id="carMake"
-                name="carMake"
-                value="<%= user.car.make %>"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="carModel">Car Model</label>
-              <input
-                type="text"
-                class="form-control"
-                id="carModel"
-                name="carModel"
-                value="<%= user.car.model %>"
-                required
-              />
-            </div>
-            <div class="text-center mt-2">
-              <button type="submit" class="btn btn-success btn-lg">
-                Update Car Information
-              </button>
-            </div>
-          </form>
-        </div>
+        <h2 class="text-center">Car Information</h2>
+
+        <p><strong>Car Make:</strong><%= user.car_details.make %></p>
+        <p><strong>Car Model:</strong><%= user.car_details.model %></p>
+        <p><strong>Build Year:</strong><%= user.car_details.year %></p>
+        <p><strong>Number Plate:</strong><%= user.car_details.plateNumber %></p>
+
+        <!-- <h3>Car Information</h3>
+        <form action="/update-car" method="POST">
+          <div class="form-group">
+            <label for="make">Car Make</label>
+            <input
+              type="text"
+              name="make"
+              value="<%= user.car_details.make %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="model">Car Model</label>
+            <input
+              type="text"
+              name="model"
+              value="<%= user.car_details.model %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="year">Year</label>
+            <input
+              type="text"
+              name="year"
+              value="<%= user.car_details.year %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="plateNumber">Plate Number</label>
+            <input
+              type="text"
+              name="plateNumber"
+              value="<%= user.car_details.plateNumber %>"
+            />
+          </div>
+
+          <input
+            type="hidden"
+            name="licenseNumber"
+            value="<%= user.licenseNumber %>"
+          />
+          <button type="submit" class="btn btn-primary">Update Car Info</button>
+        </form> -->
+        <button type="submit" class="btn btn-primary">Update Car Info</button>
       </div>
-    </main>
+    </div>
 
     <!-- Footer -->
     <%- include('layouts/footer'); -%>

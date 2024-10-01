@@ -364,7 +364,7 @@ button:hover {
 
 /* G Page Style */
 
-.g-page-main-div-style{
+.g-page-main-div-style {
   margin: 4rem 0rem;
 }
 
@@ -389,4 +389,63 @@ button:hover {
   font-weight: bold;
   margin-bottom: 1.2rem;
   color: #000;
+}
+
+/* no user page css */
+
+.no-user-page-main-div-style {
+  margin-top: 70px;
+  padding: 0rem 2rem;
+}
+
+.no-user-page-container {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-user-page-container h2 {
+  color: #000;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.no-user-page-container p {
+  color: #000;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.no-user-page-container a {
+  color: #fff;
+  background-color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  border: 2.5px solid #000;
+  border-radius: 8px;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.no-user-page-container a:hover {
+  background-color: transparent;
+  color: #000;
+}
+
+
+/* user data page css */
+
+.user-data-main-div{
+  margin-top: 70px;
+}
+
+.user-data-inner-div{
+  padding: 3rem 0rem;;
 }
