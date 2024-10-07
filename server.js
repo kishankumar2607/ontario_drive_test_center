@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const createError = require("http-errors");
-const allRoutes = require("./routes/mainRoutes"); // Import routes
+const allRoutes = require("./routes/mainRoutes");
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 // All routes
-app.use("/", allRoutes); // Use the routes
+app.use("/", allRoutes);
 
 // For handling 404 errors
 app.use(async (req, res, next) => {
@@ -31,5 +31,4 @@ app.use(async (error, req, res, next) => {
   });
 });
 
-// Export the Express API
 module.exports = app;

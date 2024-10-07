@@ -6,7 +6,10 @@
 }
 
 body {
-  color: #000;
+  font-family: "Noto Sans", sans-serif !important;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #000 !important;
 }
 
 /* Dashboard Style */
@@ -304,6 +307,22 @@ body {
   margin-bottom: 30px;
 }
 
+.button {
+  color: #ffffff;
+  font-weight: 700;
+  background-color: #000000;
+  padding: 0.5rem 1rem;
+  border: 2.5px solid #000000;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  color: #000000;
+  background-color: transparent;
+}
+
 /* Form Styles */
 .form-group {
   margin-bottom: 1.5rem;
@@ -332,20 +351,6 @@ input:focus {
   border-color: #0998ff !important;
   outline: none;
   box-shadow: 0 0 8px rgba(130, 199, 234, 0.3) !important;
-}
-
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 15px 30px;
-  font-size: 1.1rem;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 
 .btn {
@@ -439,13 +444,86 @@ button:hover {
   color: #000;
 }
 
-
 /* user data page css */
 
-.user-data-main-div{
+.user-data-main-div {
   margin-top: 70px;
+  min-height: 90vh;
 }
 
-.user-data-inner-div{
-  padding: 3rem 0rem;;
+.user-data-inner-div {
+  padding: 3rem 0rem;
+}
+
+.user-div-header {
+  font-size: 32px;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.information-div p {
+  font-size: 22px;
+  color: #000000;
+  padding-bottom: 0.5rem;
+}
+
+#licence-number {
+  color: #ff0000;
+  font-weight: 600;
+}
+
+#licence-number-strong {
+  color: #000000;
+  font-weight: 700;
+}
+
+.button-div {
+  margin: 2rem 0rem;
+}
+
+.button-div a {
+  color: #ffffff !important;
+  font-weight: 700;
+  background-color: #000000;
+  padding: 0.5rem 1rem;
+  border: 2.5px solid #000000;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-div a:hover {
+  color: #000000 !important;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button-div-padding {
+  padding: 0rem 1rem;
+}
+
+
+/* Update user css Style */
+
+.table-tr{
+  display: flex;
+  align-items: center;
+}
+
+.table-tr td label{
+  margin-bottom: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.collon-td{
+  margin: 0rem 1rem;
+  font-weight: 700;
+}
+
+.table-tr td input[type="text"]{
+  font-size: 20px;
+  font-weight: 600;
 }
