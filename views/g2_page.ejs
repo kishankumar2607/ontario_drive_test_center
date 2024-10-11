@@ -28,7 +28,13 @@
           <h2 class="text-center">G2 Test Booking Form</h2>
 
           <!-- G2 Test Booking Form -->
-          <form class="g2-test-form" id="g2Form" action="/g2" method="POST"  novalidate>
+          <form
+            class="g2-test-form"
+            id="g2Form"
+            action="/g2"
+            method="POST"
+            novalidate
+          >
             <!-- Personal Information Section -->
             <div class="section">
               <h2>Personal Information</h2>
@@ -71,11 +77,11 @@
                   class="form-control"
                   id="licenseNumber"
                   name="licenseNumber"
-                  placeholder="AB123456"
-                  minlength="8"
-                  maxlength="8"
-                  pattern="^[a-zA-Z0-9]{8}$"
-                  title="License number must be exactly 8 alphanumeric characters."
+                  placeholder="A1234-56789-12345"
+                  minlength="17"
+                  maxlength="17"
+                  pattern="[A-Za-z]\d{4}-\d{5}-\d{5}"
+                  title="License number must be exactly 15 alphanumeric characters."
                   required
                 />
                 <span id="licenseError" class="error-message"></span>
@@ -177,9 +183,7 @@
 
             <!-- Submit Button -->
             <div class="text-center mt-3">
-              <button type="submit" class="button">
-                Submit Request
-              </button>
+              <button type="submit" class="button">Submit Request</button>
             </div>
           </form>
         </div>
@@ -188,5 +192,6 @@
 
     <!-- Footer -->
     <%- include('layouts/footer'); -%> <%- include('layouts/scripts'); -%>
+    <script src="/js/scripts.js"></script>
   </body>
 </html>

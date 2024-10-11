@@ -1,6 +1,31 @@
 // validation.js
+
+// Function to format license number with dashes
+function formatLicenseNumber(input) {
+  const cleaned = input.value.replace(/[^A-Za-z0-9]/g, "");
+
+  let formatted = cleaned;
+
+  if (cleaned.length > 5) {
+    formatted = cleaned.slice(0, 5) + "-" + cleaned.slice(5);
+  }
+  if (cleaned.length > 11) {
+    formatted = formatted.slice(0, 11) + "-" + formatted.slice(11);
+  }
+
+  input.value = formatted;
+}
+
+const licenseNumberInput = document.getElementById("licenseNumber");
+
+licenseNumberInput.addEventListener('input', function () {
+  formatLicenseNumber(licenseNumberInput);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const g2Form = document.getElementById("g2Form");
+
+  // console.log(g2Form); 
 
   g2Form.addEventListener("submit", function (e) {
     let isValid = true;
@@ -29,19 +54,30 @@ document.addEventListener("DOMContentLoaded", () => {
       isValid = false;
     }
 
+    // Validate license number format
+    const ontarioLicensePattern = /^[A-Za-z]\d{4}-\d{5}-\d{5}$/;
     const licenseNumber = document.getElementById("licenseNumber");
-    if (
-      licenseNumber.value.length !== 8 ||
-      !/^[a-zA-Z0-9]+$/.test(licenseNumber.value)
-    ) {
+
+    // Count alphanumeric characters
+    const alphanumericOnly = licenseNumber.value.replace(/[^A-Za-z0-9]/g, "");
+    const alphanumericLength = alphanumericOnly.length;
+
+    // Validate alphanumeric length
+    if (alphanumericLength < 15) {
       document.getElementById("licenseError").textContent =
-        "License number must be exactly 8 alphanumeric characters.";
+        "License number must contain 15 alphanumeric characters.";
+      isValid = false;
+    } else if (!ontarioLicensePattern.test(licenseNumber.value)) {
+      document.getElementById("licenseError").textContent =
+        "License number must be in the format: A1234-56789-12345.";
       isValid = false;
     }
+
 
     const age = document.getElementById('age');
     const ageValue = age.value.trim();
     if (!/^\d+$/.test(ageValue) || ageValue < 16 || ageValue > 100) {
+      // console.log("License number validation failed");
       document.getElementById('ageError').textContent = 'Age must be a number between 16 and 100.';
       isValid = false;
     }
@@ -90,4 +126,5 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Your request has been submitted successfully!");
     }
   });
+
 });

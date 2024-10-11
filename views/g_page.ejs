@@ -26,7 +26,13 @@
         <div class="g-page-form-container">
           <h2 class="text-center">Retrieve Your Information</h2>
 
-          <form class="g-page-form" id="gPageForm" action="/user-data" method="POST">
+          <form
+            class="g-page-form"
+            id="gPageForm"
+            action="/user-data"
+            method="POST"
+            novalidate
+          >
             <div class="form-group">
               <label for="licenseNumber">License Number</label>
               <input
@@ -34,7 +40,11 @@
                 class="form-control"
                 id="licenseNumber"
                 name="licenseNumber"
-                placeholder="Enter your License Number"
+                placeholder="A1234-56789-12345"
+                minlength="17"
+                maxlength="17"
+                pattern="[A-Za-z]\d{4}-\d{5}-\d{5}"
+                title="License number must be exactly 15 alphanumeric characters."
                 required
               />
               <span id="licenseError" class="error-message"></span>
@@ -42,9 +52,7 @@
 
             <!-- Submit Button -->
             <div class="text-center mt-2">
-              <button type="submit" class="button">
-                Retrieve Data
-              </button>
+              <button type="submit" class="button">Retrieve Data</button>
             </div>
           </form>
         </div>
@@ -52,6 +60,74 @@
     </main>
 
     <!-- Footer -->
-    <%- include('layouts/footer'); -%>
+    <%- include('layouts/footer'); -%> <%- include('layouts/scripts'); -%>
   </body>
+
+  <script>
+    // Function to format license number with dashes
+    function formatLicenseNumber(input) {
+      const cleaned = input.value.replace(/[^A-Za-z0-9]/g, "");
+
+      let formatted = cleaned;
+
+      if (cleaned.length > 5) {
+        formatted = cleaned.slice(0, 5) + "-" + cleaned.slice(5);
+      }
+      if (cleaned.length > 11) {
+        formatted = formatted.slice(0, 11) + "-" + formatted.slice(11);
+      }
+
+      input.value = formatted;
+    }
+
+    // Event listener for input formatting
+    const licenseNumberInput = document.getElementById("licenseNumber");
+
+    licenseNumberInput.addEventListener("input", function () {
+      formatLicenseNumber(licenseNumberInput);
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const gPageForm = document.getElementById("gPageForm");
+
+      gPageForm.addEventListener("submit", function (e) {
+        let isValid = true;
+
+        const clearErrors = () => {
+          document.querySelectorAll(".error-message").forEach((error) => {
+            error.textContent = "";
+          });
+        };
+
+        clearErrors();
+
+        const ontarioLicensePattern = /^[A-Za-z]\d{4}-\d{5}-\d{5}$/;
+        const licenseNumber = document.getElementById("licenseNumber");
+
+        const alphanumericOnly = licenseNumber.value.replace(
+          /[^A-Za-z0-9]/g,
+          ""
+        );
+        const alphanumericLength = alphanumericOnly.length;
+
+        // Validate alphanumeric length
+        if (alphanumericLength < 15) {
+          document.getElementById("licenseError").textContent =
+            "License number must contain 15 alphanumeric characters.";
+          isValid = false;
+        } else if (!ontarioLicensePattern.test(licenseNumber.value)) {
+          document.getElementById("licenseError").textContent =
+            "License number must be in the format: A1234-56789-12345.";
+          isValid = false;
+        }
+
+        if (!isValid) {
+          e.preventDefault();
+        }
+        // else {
+        //   alert("Your request has been submitted successfully!");
+        // }
+      });
+    });
+  </script>
 </html>
