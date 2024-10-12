@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require('path');
 const cors = require("cors");
 const createError = require("http-errors");
 const allRoutes = require("./routes/mainRoutes");
@@ -9,7 +10,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static('public'));
+app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
 
 // All routes

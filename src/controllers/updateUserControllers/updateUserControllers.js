@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const User = require("../../models/userModel/userModel");
+// controllers/userController.js
+const User = require('../../models/userModel/userModel');
 
-router.get("/update_user/:licenseNumber", async (req, res) => {
+// Controller to handle fetching a user by license number for updating
+exports.getUserByLicenseNumber = async (req, res) => {
     const { licenseNumber } = req.params;
 
     try {
@@ -14,13 +14,13 @@ router.get("/update_user/:licenseNumber", async (req, res) => {
 
         res.render("update_user", { user });
     } catch (error) {
-        console.error(error);
+        console.error("Error fetching user:", error);
         res.redirect("/g");
     }
-});
+};
 
-
-router.post("/update_car_info", async (req, res) => {
+// Controller to handle updating car information
+exports.updateCarInfo = async (req, res) => {
     const { make, model, year, plateNumber, licenseNumber } = req.body;
 
     try {
@@ -39,6 +39,4 @@ router.post("/update_car_info", async (req, res) => {
         console.error("Error updating car info:", error);
         res.status(500).send("Internal Server Error");
     }
-});
-
-module.exports = router;
+};
