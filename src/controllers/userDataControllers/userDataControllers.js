@@ -43,14 +43,14 @@ exports.displayUserData = async (req, res) => {
 };
 
 // Function to delete user
-exports.deleteUser = async (req, res) => {
-    const { licenseNumber } = req.params;
+// exports.deleteUser = async (req, res) => {
+//     const { licenseNumber } = req.params;
 
-    try {
-        await User.deleteOne({ licenseNumber });
-        res.status(200).json({ message: 'User deleted successfully.' });
-    } catch (error) {
-        console.error('Error deleting user:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
-};
+//     try {
+//         await User.deleteOne({ licenseNumber });
+//         res.status(200).json({ message: 'User deleted successfully.' });
+//     } catch (error) {
+//         console.error('Error deleting user:', error);
+//         res.status(500).json({ message: 'Internal Server Error' });
+//     }
+// };

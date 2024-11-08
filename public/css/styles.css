@@ -50,7 +50,7 @@ body {
   color: #fff;
   z-index: 1;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   padding: 20px;
   border-radius: 10px;
 }
@@ -169,10 +169,10 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Login Style */
+/* Login/Signup Style */
 
 .login-main-div {
-  margin-top: 50px;
+  margin-top: 80px;
 }
 
 .login-background-container {
@@ -184,7 +184,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .login-overlay-style {
@@ -194,7 +194,7 @@ body {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .login-intro-text {
@@ -226,10 +226,16 @@ body {
   min-width: 700px;
   padding: 1.5rem;
   margin: 4rem 0rem;
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border: 2.5px solid #000;
+  border: 2.5px solid #fff;
   border-radius: 10px;
+}
+
+.login-form-container h2{
+  font-weight: 700;
+  margin-bottom: 1.5rem;
 }
 
 .login-form-group {
@@ -238,12 +244,50 @@ body {
 
 .login-form-group label {
   font-weight: bold;
+  color: #ffffff;
 }
 
 .login-form-group input {
   border: 1px solid #ced4da;
   border-radius: 5px;
   padding: 0.5rem;
+}
+
+.user-type{
+  margin-right: 0.5rem;
+}
+
+.user-type-select{
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+
+.button-login {
+  color: #000000;
+  font-weight: 700;
+  background-color: #ffffff;
+  padding: 0.5rem 1.2rem;
+  border: 2.5px solid #ffffff;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-login:hover {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.do-not-have-account{
+  margin-top: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.do-not-have-account a{
+  color: #ff0000;
+  text-decoration: none;
 }
 
 /* G2 Page Style */
@@ -266,7 +310,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: -1;
 }
 
@@ -401,7 +445,7 @@ input:focus {
 }
 
 .g-page-form-container {
-  min-width: 700px;
+  max-width: 700px;
   padding: 1.5rem;
   background-color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -413,6 +457,15 @@ input:focus {
   font-weight: bold;
   margin-bottom: 1.2rem;
   color: #000;
+}
+
+.button a{
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.button a:hover{
+  color: #000000;
 }
 
 /* no user page css */

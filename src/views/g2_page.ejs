@@ -13,6 +13,9 @@
         <div class="content-wrapper">
           <!-- Introductory Text -->
           <div class="intro-text text-center">
+            <% if (loggedIn) { %>
+            <h1>Hello <%= username %></h1>
+            <% } %>
             <h1>Welcome to the G2 Test Booking Portal</h1>
             <h3>
               Prepare for your G2 driving test by submitting your personal and

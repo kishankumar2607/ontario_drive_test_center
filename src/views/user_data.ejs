@@ -7,7 +7,7 @@
 
     <div class="user-data-main-div">
       <div class="user-data-inner-div container">
-        <h2 class="user-div-header">User Information</h2>
+        <h2 class="user-div-header">Updated User Information</h2>
 
         <div class="information-div">
           <p>
@@ -23,7 +23,7 @@
 
         <!-- Car Information-->
 
-        <h2 class="user-div-header">Car Information</h2>
+        <h2 class="user-div-header mt-5">Car Information</h2>
 
         <div class="information-div">
           <p><strong>Car Make:</strong> <%= user.car_details.make %></p>
@@ -37,7 +37,9 @@
         <div class="button-div">
           <a href="/update_user/<%= user.licenseNumber %>">Update User</a>
           <span class="button-div-padding"></span>
-          <a id="delete-user-btn">Delete User</a>
+          <a href="/g">Go to G page</a>
+          <!-- <a id="delete-user-btn">Delete User</a> -->
+          <span class="button-div-padding"></span>
         </div>
       </div>
     </div>

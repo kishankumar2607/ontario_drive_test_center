@@ -1,40 +1,55 @@
 const User = require("../../models/userModel/userModel");
+const moment = require('moment');
 
-// Controller to render the G test booking page
-exports.getGPage = (req, res) => {
-    res.render("g_page", {
-        title: "G Test Booking | Apply for Your G License Exam",
-    });
-};
-
-// Controller to handle retrieval of user data by license number
-exports.postGBooking = async (req, res) => {
-    const licenseNumber = req.body.licenseNumber;
-
+// Controller to render the G test booking page and display user data
+exports.getGPage = async (req, res) => {
     try {
-        const user = await User.findOne({ licenseNumber });
+        const userId = req.session.userId;
 
-        res.render('g_page', { user });
+        const user = await User.findById(userId);
+
+        // console.log("g controller data", user);
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        // Format the DOB to a human-readable format (e.g., MM/DD/YYYY)
+        const formattedDob = moment(user.dob).format('MM/DD/YYYY');
+
+        res.render("g_page", {
+            title: "G Test Booking | Apply for Your G License Exam",
+            user,
+            formattedDob
+        });
     } catch (error) {
         console.error("Error retrieving user:", error);
-        res.render('g_page', { user: null });
+        res.status(500).send("Server error");
     }
 };
 
 // Controller to handle updating car information
 exports.updateCarInfo = async (req, res) => {
-    const { userId, carMake, carModel } = req.body;
+    const { make, model } = req.body;
+
+    const userId = req.session.userId;
 
     try {
-        await User.findByIdAndUpdate(userId, {
-            'car.make': carMake,
-            'car.model': carModel
-        });
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            {
+                'car_details.make': make,
+                'car_details.model': model
+            },
+            { new: true }
+        );
 
-        const updatedUser = await User.findById(userId);
-        res.render('g_page', { user: updatedUser });
+        res.render("g_page", {
+            title: "G Test Booking | Apply for Your G License Exam",
+            user: updatedUser
+        });
     } catch (error) {
         console.error("Error updating car information:", error);
-        res.redirect('/g');
+        res.status(500).send("Server error");
     }
 };

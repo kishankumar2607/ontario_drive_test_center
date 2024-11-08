@@ -14,47 +14,78 @@
         <div class="content-wrapper">
           <!-- Introductory Text -->
           <div class="intro-text">
-            <h1>Welcome to the G Test Data Retrieval Portal</h1>
-            <h3>
-              Enter your License Number below to retrieve your details from the
-              database.
-            </h3>
+            <% if (loggedIn) { %>
+            <h1>Hello <%= username %></h1>
+            <% } %>
+            <h2>Welcome to the G Test Data Retrieval Portal</h2>
           </div>
         </div>
       </div>
       <div class="g-page-container">
         <div class="g-page-form-container">
-          <h2 class="text-center">Retrieve Your Information</h2>
+          <h2 class="text-center">Your Information</h2>
 
-          <form
-            class="g-page-form"
-            id="gPageForm"
-            action="/user-data"
-            method="POST"
-            novalidate
-          >
-            <div class="form-group">
-              <label for="licenseNumber">License Number</label>
-              <input
-                type="text"
-                class="form-control"
-                id="licenseNumber"
-                name="licenseNumber"
-                placeholder="A1234-56789-12345"
-                minlength="17"
-                maxlength="17"
-                pattern="[A-Za-z]\d{4}-\d{5}-\d{5}"
-                title="License number must be exactly 15 alphanumeric characters."
-                required
-              />
-              <span id="licenseError" class="error-message"></span>
-            </div>
+          <% if (user && user.licenseNumber !== "default") { %>
+          <p class="pb-2">
+            <strong>Name:</strong> <%= user.firstName %> <%= user.lastName %>
+          </p>
+          <p class="pb-2"><strong>License Number:</strong> <%= user.licenseNumber %></p>
+          <p class="pb-2"><strong>Age:</strong> <%= user.age %></p>
+          <p class="pb-2"><strong>Date of Birth:</strong> <%= formattedDob %></p>
 
-            <!-- Submit Button -->
-            <div class="text-center mt-2">
-              <button type="submit" class="button">Retrieve Data</button>
+          <h2 class="text-center mt-4">Your Car Information</h2>
+          <p class="pb-2"><strong>Make:</strong> <%= user.car_details.make || 'N/A' %></p>
+          <p class="pb-2"><strong>Model:</strong> <%= user.car_details.model || 'N/A' %></p>
+          <p class="pb-2"><strong>Year:</strong> <%= user.car_details.year || 'N/A' %></p>
+          <p class="pb-2"><strong>Plate Number:</strong> <%= user.car_details.plateNumber || 'N/A' %></p>
+
+          <!-- <h2 class="text-center mt-4">Update Car Information</h2>
+          <form action="/g/update" method="POST">
+            <label for="carMake">Make:</label>
+            <input
+              type="text"
+              id="carMake"
+              name="carMake"
+              value="<%= user.car_details.make || '' %>"
+              required
+            />
+
+            <label for="carModel" class="mt-3">Model:</label>
+            <input
+              type="text"
+              id="carModel"
+              name="carModel"
+              value="<%= user.car_details.model || '' %>"
+              required
+            />
+
+            <label for="carYear" class="mt-3">Year:</label>
+            <input
+              type="text"
+              id="carYear"
+              name="carYear"
+              value="<%= user.car_details.year || '' %>"
+              required
+            />
+
+            <label for="carplateNumber" class="mt-3">Plate Number:</label>
+            <input
+              type="text"
+              id="carplateNumber"
+              name="carplateNumber"
+              value="<%= user.car_details.plateNumber || '' %>"
+              required
+            /> -->
+
+            <div class="d-flex align-items-center justify-content-center mt-4">
+              <button type="submit" class="button">
+              <a href="/update_user/<%= user.licenseNumber %>">Update Information</a></button>
             </div>
           </form>
+          <% } else { %>
+            <!-- Show message to fill out the G2 form if user data is default -->
+            <h4 class="text-center">Please fill out the G2 form to view your information.</h4>
+          <% } %>
         </div>
       </div>
     </main>

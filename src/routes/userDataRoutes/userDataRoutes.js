@@ -9,7 +9,7 @@ router.post("/user-data", userDataController.retrieveUserData);
 router.get("/user-data/:licenseNumber", userDataController.displayUserData);
 
 // Route to delete a user
-router.delete('/delete_user/:licenseNumber', userDataController.deleteUser);
+// router.delete('/delete_user/:licenseNumber', userDataController.deleteUser);
 
 
 module.exports = router;

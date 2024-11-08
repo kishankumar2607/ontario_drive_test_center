@@ -1,4 +1,4 @@
-// controllers/userController.js
+
 const User = require('../../models/userModel/userModel');
 
 // Controller to handle fetching a user by license number for updating
