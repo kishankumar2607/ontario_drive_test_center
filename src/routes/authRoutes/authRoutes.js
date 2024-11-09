@@ -4,10 +4,10 @@ const authController = require('../../controllers/authController/authController'
 
 // Render the Login and Signup pages
 router.get("/login", authController.renderLoginPage);
-router.get("/signup", authController.renderSignupPage);
+router.get("/register", authController.renderSignupPage);
 
 // Signup Routes
-router.post('/signup', authController.signup);
+router.post('/register', authController.signup);
 
 // Login Route
 router.post('/login', authController.login);

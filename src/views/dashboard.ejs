@@ -77,7 +77,11 @@
       <!-- Call to Action -->
       <section class="call-to-action text-center">
         <h2 class="mb-5">Ready to book your test?</h2>
+        <% if (loggedIn) { %>
+        <a href="/g2" class="button">Book Now</a>
+        <% } else { %>
         <a href="/login" class="button">Book Now</a>
+        <% } %>
       </section>
     </div>
 

@@ -4,7 +4,9 @@ const moment = require('moment');
 
 // Controller to render the G2 test booking page and display user data
 exports.getG2Page = async (req, res) => {
+    
     const userId = req.session.userId;
+
     // console.log("user id in get method in g2 controller: " + userId);
 
     try {
@@ -13,12 +15,14 @@ exports.getG2Page = async (req, res) => {
         if (user && user.licenseNumber === "default") {
             res.render("g2_page", {
                 title: "G2 Test Booking | Schedule Your G2 License Test",
-                user: null
+                user: null,
+                buttonText: "Submit Request",
             });
         } else {
             res.render("g2_page", {
                 title: "G2 Test Booking | Schedule Your G2 License Test",
-                user: user
+                user: user,
+                buttonText: "Update Information",
             });
         }
     } catch (error) {
@@ -31,11 +35,13 @@ exports.getG2Page = async (req, res) => {
 // Controller to handle booking a G2 test
 exports.postG2Booking = async (req, res) => {
     const userId = req.session.userId;
+    
     // console.log("user id in post method in g2 controller: " + userId);
 
-    const { firstName, lastName, licenseNumber, age, dob, make, model, year, plateNumber } = req.body;
+    const { firstName, lastName, licenseNumber, dob, make, model, year, plateNumber } = req.body;
 
     const formattedDob = moment(dob).isValid() ? moment(dob).format('YYYY-MM-DD') : null;
+    const age = formattedDob ? moment().diff(moment(formattedDob), 'years') : null;
 
     try {
         await User.findByIdAndUpdate(userId, {

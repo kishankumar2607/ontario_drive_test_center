@@ -29,23 +29,27 @@
           <p class="pb-2">
             <strong>Name:</strong> <%= user.firstName %> <%= user.lastName %>
           </p>
-          <p class="pb-2"><strong>License Number:</strong> <%= user.licenseNumber %></p>
+          <p class="pb-2">
+            <strong>License Number:</strong> <%= user.licenseNumber %>
+          </p>
           <p class="pb-2"><strong>Age:</strong> <%= user.age %></p>
-          <p class="pb-2"><strong>Date of Birth:</strong> <%= formattedDob %></p>
+          <p class="pb-2">
+            <strong>Date of Birth:</strong> <%= formattedDob %>
+          </p>
 
-          <h2 class="text-center mt-4">Your Car Information</h2>
+          <!-- <h2 class="text-center mt-4">Your Car Information</h2>
           <p class="pb-2"><strong>Make:</strong> <%= user.car_details.make || 'N/A' %></p>
           <p class="pb-2"><strong>Model:</strong> <%= user.car_details.model || 'N/A' %></p>
           <p class="pb-2"><strong>Year:</strong> <%= user.car_details.year || 'N/A' %></p>
-          <p class="pb-2"><strong>Plate Number:</strong> <%= user.car_details.plateNumber || 'N/A' %></p>
+          <p class="pb-2"><strong>Plate Number:</strong> <%= user.car_details.plateNumber || 'N/A' %></p> -->
 
-          <!-- <h2 class="text-center mt-4">Update Car Information</h2>
-          <form action="/g/update" method="POST">
+          <h2 class="text-center mt-4">Update Car Information</h2>
+          <form id="gForm" action="/g" method="POST">
             <label for="carMake">Make:</label>
             <input
               type="text"
               id="carMake"
-              name="carMake"
+              name="make"
               value="<%= user.car_details.make || '' %>"
               required
             />
@@ -54,7 +58,7 @@
             <input
               type="text"
               id="carModel"
-              name="carModel"
+              name="model"
               value="<%= user.car_details.model || '' %>"
               required
             />
@@ -63,7 +67,7 @@
             <input
               type="text"
               id="carYear"
-              name="carYear"
+              name="year"
               value="<%= user.car_details.year || '' %>"
               required
             />
@@ -72,19 +76,20 @@
             <input
               type="text"
               id="carplateNumber"
-              name="carplateNumber"
+              name="plateNumber"
               value="<%= user.car_details.plateNumber || '' %>"
               required
-            /> -->
+            />
 
             <div class="d-flex align-items-center justify-content-center mt-4">
-              <button type="submit" class="button">
-              <a href="/update_user/<%= user.licenseNumber %>">Update Information</a></button>
+              <button type="submit" class="button">Update Information</button>
             </div>
           </form>
           <% } else { %>
-            <!-- Show message to fill out the G2 form if user data is default -->
-            <h4 class="text-center">Please fill out the G2 form to view your information.</h4>
+          <!-- Show message to fill out the G2 form if user data is default -->
+          <h4 class="text-center">
+            Please fill out the G2 form to view your information.
+          </h4>
           <% } %>
         </div>
       </div>

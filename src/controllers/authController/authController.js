@@ -75,14 +75,12 @@ exports.login = async (req, res) => {
     const user = await findUserByUsername(username);
 
     if (!user) {
-      // return res.status(400).send('User not found. Please sign up.');
       return res.status(400).render('login', { title: 'Login', message: 'User not found. Please sign up.' });
     }
 
     // Compare the entered password with the hashed password in the database
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      // return res.status(400).send('Invalid credentials.');
       return res.status(400).render('login', { title: 'Login', message: 'Invalid credentials.' });
     }
 
