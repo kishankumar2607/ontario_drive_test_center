@@ -1,5 +1,6 @@
 const User = require("../../models/userModel/userModel");
 const moment = require('moment');
+const { decrypt } = require("../../utils/encryptDecrypt");
 
 // Controller to render the G test booking page and display user data
 exports.getGPage = async (req, res) => {
@@ -10,10 +11,17 @@ exports.getGPage = async (req, res) => {
 
         const user = await User.findById(userId);
 
-        console.log("g controller data", user);
+        // console.log("g controller data", user);
 
         if (!user) {
             return res.status(404).send("User not found");
+        }
+
+        // Decrypt the licenseNumber
+        let decryptedLicenseNumber = null;
+
+        if (user.licenseNumber && user.licenseNumber !== "default") {
+            decryptedLicenseNumber = decrypt(user.licenseNumber);
         }
 
         // Format the DOB to a human-readable format (e.g., MM/DD/YYYY)
@@ -22,7 +30,8 @@ exports.getGPage = async (req, res) => {
         res.render("g_page", {
             title: "G Test Booking | Apply for Your G License Exam",
             user,
-            formattedDob
+            formattedDob,
+            decryptedLicenseNumber,
         });
     } catch (error) {
         console.error("Error retrieving user:", error);

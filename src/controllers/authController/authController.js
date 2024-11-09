@@ -60,7 +60,10 @@ exports.signup = async (req, res) => {
 
     // Save the new user to the database
     await newUser.save();
-    res.redirect('/login');
+
+    // Redirect to login page with success message
+    res.status(200).render('login', { title: 'Sucess', message: 'Registration successful! Please log in.' });
+
   } catch (error) {
     console.error("Error during signup:", error);
     res.status(500).send('Server error');

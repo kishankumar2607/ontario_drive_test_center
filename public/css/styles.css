@@ -66,7 +66,7 @@ body {
   font-weight: 700;
 }
 
-.started-button{
+.started-button {
   background-color: #ff0000;
   padding: 0.6rem 1rem;
   border: 2.5px solid #ff0000;
@@ -78,7 +78,7 @@ body {
   transition: all 0.2s ease-in;
 }
 
-.started-button:hover{
+.started-button:hover {
   background-color: transparent;
   color: #ff0000;
 }
@@ -233,7 +233,7 @@ body {
   border-radius: 10px;
 }
 
-.login-form-container h2{
+.login-form-container h2 {
   font-weight: 700;
   margin-bottom: 1.5rem;
 }
@@ -253,11 +253,11 @@ body {
   padding: 0.5rem;
 }
 
-.user-type{
+.user-type {
   margin-right: 0.5rem;
 }
 
-.user-type-select{
+.user-type-select {
   padding: 0.5rem;
   border-radius: 5px;
   border: 1px solid #ced4da;
@@ -280,12 +280,12 @@ body {
   background-color: transparent;
 }
 
-.do-not-have-account{
+.do-not-have-account {
   margin-top: 1.5rem;
   letter-spacing: 0.5px;
 }
 
-.do-not-have-account a{
+.do-not-have-account a {
   color: #ff0000;
   text-decoration: none;
 }
@@ -293,7 +293,7 @@ body {
 /* G2 Page Style */
 
 .background-container {
-  background-image: url("/images/drive-test-bg.png");
+  background-image: url("/images/drive-test-bg.jpg");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -310,7 +310,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: -1;
 }
 
@@ -430,6 +430,20 @@ input:focus {
   margin-top: 5px;
 }
 
+.bigger-text{
+  font-size: 22px ;
+}
+
+.license-number-style{
+  color: #ff0000;
+  font-weight: 600;
+}
+
+.license-number-style strong{
+  color: #000000 !important;
+  font-weight: bold;
+}
+
 /* G Page Style */
 
 .g-page-main-div-style {
@@ -459,12 +473,12 @@ input:focus {
   color: #000;
 }
 
-.button a{
+.button a {
   text-decoration: none;
   color: #ffffff;
 }
 
-.button a:hover{
+.button a:hover {
   color: #000000;
 }
 
@@ -516,86 +530,29 @@ input:focus {
   color: #000;
 }
 
-/* user data page css */
-
-.user-data-main-div {
-  margin-top: 70px;
-  min-height: 90vh;
-}
-
-.user-data-inner-div {
-  padding: 3rem 0rem;
-}
-
-.user-div-header {
-  font-size: 32px;
-  font-weight: 700;
-  color: #000000;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.information-div p {
-  font-size: 22px;
-  color: #000000;
-  padding-bottom: 0.5rem;
-}
-
-#licence-number {
-  color: #ff0000;
-  font-weight: 600;
-}
-
-#licence-number-strong {
-  color: #000000;
-  font-weight: 700;
-}
-
-.button-div {
-  margin: 2rem 0rem;
-}
-
-.button-div a {
-  color: #ffffff !important;
-  font-weight: 700;
-  background-color: #000000;
-  padding: 0.5rem 1rem;
-  border: 2.5px solid #000000;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-}
-
-.button-div a:hover {
-  color: #000000 !important;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.button-div-padding {
-  padding: 0rem 1rem;
-}
-
-
-/* Update user css Style */
-
-.table-tr{
+/* 404 Page style */
+.not-found-container {
+  height: 90vh;
+  margin-top: 30px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #000000;
 }
 
-.table-tr td label{
-  margin-bottom: 0;
-  font-size: 22px;
-  font-weight: 700;
+.not-found-container h1 {
+  font-size: 100px;
+  margin: 20px 0;
 }
 
-.collon-td{
-  margin: 0rem 1rem;
-  font-weight: 700;
+.not-found-container h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
 }
 
-.table-tr td input[type="text"]{
-  font-size: 20px;
-  font-weight: 600;
+.not-found-container p {
+  font-size: 18px;
+  margin-bottom: 30px;
 }

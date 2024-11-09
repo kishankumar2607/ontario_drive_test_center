@@ -7,7 +7,7 @@ function formatLicenseNumber(input) {
   let formatted = cleaned;
 
   if (cleaned.length > 5) {
-    formatted = cleaned.slice(0, 5) + "-" + cleaned.slice(5);
+    formatted = cleaned.slice(0, 5) + "-" + cleaned.slice(5); // Fixed typo
   }
   if (cleaned.length > 11) {
     formatted = formatted.slice(0, 11) + "-" + formatted.slice(11);
@@ -25,8 +25,6 @@ licenseNumberInput.addEventListener('input', function () {
 document.addEventListener("DOMContentLoaded", () => {
   const g2Form = document.getElementById("g2Form");
 
-  // console.log(g2Form); 
-
   g2Form.addEventListener("submit", function (e) {
     let isValid = true;
 
@@ -42,15 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Validate Personal Information
     const firstName = document.getElementById("firstName");
     if (!firstName.value.trim()) {
-      document.getElementById("firstNameError").textContent =
-        "First Name is required.";
+      document.getElementById("firstNameError").textContent = "First Name is required.";
       isValid = false;
     }
 
     const lastName = document.getElementById("lastName");
     if (!lastName.value.trim()) {
-      document.getElementById("lastNameError").textContent =
-        "Last Name is required.";
+      document.getElementById("lastNameError").textContent = "Last Name is required.";
       isValid = false;
     }
 
@@ -64,44 +60,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Validate alphanumeric length
     if (alphanumericLength < 15) {
-      document.getElementById("licenseError").textContent =
-        "License number must contain 15 alphanumeric characters.";
+      document.getElementById("licenseError").textContent = "License number must contain 15 alphanumeric characters.";
       isValid = false;
     } else if (!ontarioLicensePattern.test(licenseNumber.value)) {
-      document.getElementById("licenseError").textContent =
-        "License number must be in the format: A1234-56789-12345.";
+      document.getElementById("licenseError").textContent = "License number must be in the format: A1234-56789-12345.";
       isValid = false;
     }
-
 
     const age = document.getElementById('age');
     const ageValue = age.value.trim();
     if (!/^\d+$/.test(ageValue) || ageValue < 16 || ageValue > 100) {
-      // console.log("License number validation failed");
       document.getElementById('ageError').textContent = 'Age must be a number between 16 and 100.';
       isValid = false;
     }
 
-
     const dob = document.getElementById("dob");
     if (!dob.value) {
-      document.getElementById("dobError").textContent =
-        "Date of Birth is required.";
+      document.getElementById("dobError").textContent = "Date of Birth is required.";
       isValid = false;
     }
 
     // Validate Car Information
     const carMake = document.getElementById("carMake");
     if (!carMake.value.trim()) {
-      document.getElementById("carMakeError").textContent =
-        "Car Make is required.";
+      document.getElementById("carMakeError").textContent = "Car Make is required.";
       isValid = false;
     }
 
     const carModel = document.getElementById("carModel");
     if (!carModel.value.trim()) {
-      document.getElementById("carModelError").textContent =
-        "Car Model is required.";
+      document.getElementById("carModelError").textContent = "Car Model is required.";
       isValid = false;
     }
 
@@ -114,8 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const plateNumber = document.getElementById("plateNumber");
     if (!/^[A-Z0-9-]+$/.test(plateNumber.value)) {
-      document.getElementById("plateError").textContent =
-        "Plate number must contain only uppercase letters, numbers, and dashes.";
+      document.getElementById("plateError").textContent = "Plate number must contain only uppercase letters, numbers, and dashes.";
       isValid = false;
     }
 
@@ -126,5 +113,4 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Your request has been submitted successfully!");
     }
   });
-
 });

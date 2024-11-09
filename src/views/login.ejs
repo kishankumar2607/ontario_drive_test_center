@@ -55,7 +55,9 @@
                 </div>
               </form>
 
-              <p class="do-not-have-account">Don't have an account? <a href="/register">Register here</a></p>
+              <p class="do-not-have-account">
+                Don't have an account? <a href="/register">Register here</a>
+              </p>
             </div>
           </div>
         </div>
@@ -67,9 +69,9 @@
 
     <!-- Display error message -->
     <% if (typeof message !== 'undefined') { %>
-      <script>
-        alert("<%= message %>");
-      </script>
+    <script>
+      alert("<%= message %>");
+    </script>
     <% } %>
 
     <!-- Validation Script -->

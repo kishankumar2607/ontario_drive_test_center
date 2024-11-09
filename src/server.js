@@ -3,8 +3,8 @@ const session = require('express-session');
 const path = require('path');
 const cors = require("cors");
 const bodyParser = require('body-parser');
-const createError = require("http-errors");
 const allRoutes = require("./routes/mainRoutes");
+const flash = require('connect-flash');
 
 const app = express();
 
@@ -16,6 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
+
+
+// Flash middleware
+app.use(flash());
 
 
 // console.log("server js username: " + global.username);
@@ -40,9 +44,10 @@ app.use((req, res, next) => {
 // All routes
 app.use("/", allRoutes);
 
-// For handling 404 errors
-app.use(async (req, res, next) => {
-  next(createError.NotFound("This route does not exist"));
+
+// Handle 404 - Page Not Found
+app.use((req, res) => {
+  res.status(404).render('notfound', { title: '404 - Page Not Found' });
 });
 
 // Error Handler

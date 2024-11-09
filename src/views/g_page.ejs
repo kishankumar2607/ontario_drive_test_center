@@ -26,22 +26,16 @@
           <h2 class="text-center">Your Information</h2>
 
           <% if (user && user.licenseNumber !== "default") { %>
-          <p class="pb-2">
+          <p class="pb-2 bigger-text">
             <strong>Name:</strong> <%= user.firstName %> <%= user.lastName %>
           </p>
-          <p class="pb-2">
-            <strong>License Number:</strong> <%= user.licenseNumber %>
+          <p class="pb-2 license-number-style bigger-text">
+            <strong>License Number:</strong> <%= decryptedLicenseNumber %>
           </p>
-          <p class="pb-2"><strong>Age:</strong> <%= user.age %></p>
-          <p class="pb-2">
+          <p class="pb-2 bigger-text"><strong>Age:</strong> <%= user.age %></p>
+          <p class="pb-2 bigger-text">
             <strong>Date of Birth:</strong> <%= formattedDob %>
           </p>
-
-          <!-- <h2 class="text-center mt-4">Your Car Information</h2>
-          <p class="pb-2"><strong>Make:</strong> <%= user.car_details.make || 'N/A' %></p>
-          <p class="pb-2"><strong>Model:</strong> <%= user.car_details.model || 'N/A' %></p>
-          <p class="pb-2"><strong>Year:</strong> <%= user.car_details.year || 'N/A' %></p>
-          <p class="pb-2"><strong>Plate Number:</strong> <%= user.car_details.plateNumber || 'N/A' %></p> -->
 
           <h2 class="text-center mt-4">Update Car Information</h2>
           <form id="gForm" action="/g" method="POST">
@@ -98,72 +92,4 @@
     <!-- Footer -->
     <%- include('layouts/footer'); -%> <%- include('layouts/scripts'); -%>
   </body>
-
-  <script>
-    // Function to format license number with dashes
-    function formatLicenseNumber(input) {
-      const cleaned = input.value.replace(/[^A-Za-z0-9]/g, "");
-
-      let formatted = cleaned;
-
-      if (cleaned.length > 5) {
-        formatted = cleaned.slice(0, 5) + "-" + cleaned.slice(5);
-      }
-      if (cleaned.length > 11) {
-        formatted = formatted.slice(0, 11) + "-" + formatted.slice(11);
-      }
-
-      input.value = formatted;
-    }
-
-    // Event listener for input formatting
-    const licenseNumberInput = document.getElementById("licenseNumber");
-
-    licenseNumberInput.addEventListener("input", function () {
-      formatLicenseNumber(licenseNumberInput);
-    });
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const gPageForm = document.getElementById("gPageForm");
-
-      gPageForm.addEventListener("submit", function (e) {
-        let isValid = true;
-
-        const clearErrors = () => {
-          document.querySelectorAll(".error-message").forEach((error) => {
-            error.textContent = "";
-          });
-        };
-
-        clearErrors();
-
-        const ontarioLicensePattern = /^[A-Za-z]\d{4}-\d{5}-\d{5}$/;
-        const licenseNumber = document.getElementById("licenseNumber");
-
-        const alphanumericOnly = licenseNumber.value.replace(
-          /[^A-Za-z0-9]/g,
-          ""
-        );
-        const alphanumericLength = alphanumericOnly.length;
-
-        // Validate alphanumeric length
-        if (alphanumericLength < 15) {
-          document.getElementById("licenseError").textContent =
-            "License number must contain 15 alphanumeric characters.";
-          isValid = false;
-        } else if (!ontarioLicensePattern.test(licenseNumber.value)) {
-          document.getElementById("licenseError").textContent =
-            "License number must be in the format: A1234-56789-12345.";
-          isValid = false;
-        }
-
-        if (!isValid) {
-          e.preventDefault();
-        }
-        // else {
-        //   alert("Your request has been submitted successfully!");
-        // }
-      });
-    });
-  </script>
 </html>
