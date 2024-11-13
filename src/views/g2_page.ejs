@@ -31,7 +31,13 @@
           <h2 class="text-center">G2 Test Booking Form</h2>
 
           <!-- G2 Test Booking Form -->
-          <form class="g2-test-form" id="g2Form" action="/g2" method="POST">
+          <form
+            class="g2-test-form"
+            id="g2Form"
+            action="/g2"
+            method="POST"
+            novalidate
+          >
             <!-- Personal Information Section -->
             <div class="section">
               <h2>Personal Information</h2>
@@ -44,7 +50,7 @@
                   class="form-control"
                   id="firstName"
                   name="firstName"
-                  value="<%= user && user.firstName !== 'default' ? user.firstName : '' %>"
+                  value="<%= user && user.firstName ? user.firstName : '' %>"
                   placeholder="John"
                   required
                 />
@@ -60,7 +66,7 @@
                   class="form-control"
                   id="lastName"
                   name="lastName"
-                  value="<%= user && user.lastName !== 'default' ? user.lastName : '' %>"
+                  value="<%= user && user.lastName ? user.lastName : '' %>"
                   placeholder="Doe"
                   required
                 />
@@ -76,12 +82,10 @@
                   class="form-control"
                   id="licenseNumber"
                   name="licenseNumber"
-                  value="<%= user && user.licenseNumber !== 'default' ? user.licenseNumber : '' %>"
-                  placeholder="A1234-56789-12345"
-                  minlength="17"
-                  maxlength="17"
-                  pattern="[A-Za-z]\d{4}-\d{5}-\d{5}"
-                  title="License number must be exactly 15 alphanumeric characters."
+                  value="<%= user && user.licenseNumber ? user.licenseNumber : '' %>"
+                  placeholder="A1234567"
+                  minlength="8"
+                  maxlength="8"
                   required
                 />
                 <span id="licenseError" class="error-message"></span>
@@ -91,9 +95,14 @@
                 <label for="dob"
                   >Date of Birth <span class="required">*</span></label
                 >
-                <input type="date" class="form-control" id="dob" name="dob"
-                value="<%= user && user.dob !== 'default' ? user.dob : '' %>""
-                required />
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dob"
+                  name="dob"
+                  value="<%= user && user.dob ? user.dob : '' %>"
+                  required
+                />
                 <span id="dobError" class="error-message"></span>
               </div>
             </div>
@@ -110,7 +119,7 @@
                   class="form-control"
                   id="carMake"
                   name="make"
-                  value="<%= user && user.car_details && user.car_details.make !== 'default' ? user.car_details.make : '' %>"
+                  value="<%= user && user.car_details && user.car_details.make ? user.car_details.make : '' %>"
                   placeholder="Mercedes-Maybach"
                   required
                 />
@@ -126,7 +135,7 @@
                   class="form-control"
                   id="carModel"
                   name="model"
-                  value="<%= user && user.car_details && user.car_details.model!== 'default'? user.car_details.model : '' %>"
+                  value="<%= user && user.car_details && user.car_details.model ? user.car_details.model : '' %>"
                   placeholder="4MATXXX"
                   required
                 />
@@ -142,10 +151,8 @@
                   class="form-control"
                   id="carYear"
                   name="year"
-                  value="<%= user && user.car_details && user.car_details.year !== 'default' ? user.car_details.year : '' %>"
+                  value="<%= user && user.car_details && user.car_details.year ? user.car_details.year : '' %>"
                   placeholder="2024"
-                  min="1900"
-                  max="2024"
                   required
                 />
                 <span id="carYearError" class="error-message"></span>
@@ -160,7 +167,7 @@
                   class="form-control"
                   id="plateNumber"
                   name="plateNumber"
-                  value="<%= user && user.car_details && user.car_details.plateNumber !== 'default' ? user.car_details.plateNumber : '' %>"
+                  value="<%= user && user.car_details && user.car_details.plateNumber ? user.car_details.plateNumber : '' %>"
                   placeholder="1HGTXXX"
                   required
                 />
@@ -179,6 +186,7 @@
 
     <!-- Footer -->
     <%- include('layouts/footer'); -%> <%- include('layouts/scripts'); -%>
+
     <script src="/js/scripts.js"></script>
   </body>
 </html>

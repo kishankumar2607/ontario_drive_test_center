@@ -79,6 +79,9 @@ exports.login = async (req, res) => {
 
     if (!user) {
       return res.status(400).render('login', { title: 'Login', message: 'User not found. Please sign up.' });
+      const validationErrors = Object.keys(error.errors).map(key =>  
+        error.errors[key].message) 
+                   req.flash('validationErrors',validationErrors) 
     }
 
     // Compare the entered password with the hashed password in the database
