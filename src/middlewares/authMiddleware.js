@@ -10,9 +10,16 @@ module.exports = {
     },
 
     isDriver: (req, res, next) => {
-        if (req.session.userType !== 'Driver') {
-            return res.status(403).send("Access denied. You do not have permission to view this page.");
+        if (req.session.userType === 'Driver') {
+            return next();
         }
-        next();
+        res.redirect('/login');
+    },
+
+    isAdmin: (req, res, next) => {
+        if (req.session.userType === 'Admin') {
+            return next();
+        }
+        res.redirect('/login');
     }
 };

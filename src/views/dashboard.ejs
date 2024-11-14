@@ -13,12 +13,15 @@
       <section class="hero">
         <div class="hero-bg"></div>
         <div class="overlay">
-          <% if (loggedIn) { %>
+          <% if (loggedIn && userType === 'Driver') { %>
           <h1>Hello <%= username %></h1>
-          <% } %>
           <h1>Welcome to Your Driving Test Portal!</h1>
           <h3>Book your G and G2 driving tests easily.</h3>
-          <% if (!loggedIn) { %>
+          <% } %> <% if (loggedIn && userType === 'Admin') { %>
+          <h1 style="font-size: 40px">Hello Admin <%= username %></h1>
+          <h1>Welcome to Your Admin Portal!</h1>
+          <h3>Manage your users and test schedules.</h3>
+          <% } %> <% if (!loggedIn) { %>
           <a href="/login" class="started-button">Get Started</a>
           <% } %>
         </div>
@@ -75,6 +78,7 @@
       </section>
 
       <!-- Call to Action -->
+      <% if (loggedIn && userType === 'Driver') { %>
       <section class="call-to-action text-center">
         <h2 class="mb-5">Ready to book your test?</h2>
         <% if (loggedIn) { %>
@@ -83,6 +87,7 @@
         <a href="/login" class="button">Book Now</a>
         <% } %>
       </section>
+      <% } %>
     </div>
 
     <!-- Footer -->

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('layouts/header'); -%>
+    <title>Manage Appointments</title>
+    <style>
+      label {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      .slot-button {
+        color: #000000;
+        font-weight: 700;
+        background-color: transparent;
+        padding: 0.5rem 1.2rem;
+        border: 2.5px solid #ff0000;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .slot-button:hover {
+        color: #ffffff;
+        background-color: #ff0000;
+      }
+
+      .active-slot {
+        background-color: #ff0000;
+        color: #ffffff;
+        border-color: #ff0000;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('layouts/navbar'); -%>
+
+    <main>
+      <div class="appointment-main-div">
+        <div class="container appointment-inner-div">
+          <h1>Manage Appointments</h1>
+
+          <!-- Flash Message Display -->
+          <% if (messages.error && messages.error.length > 0) { %>
+          <div class="alert alert-danger"><%= messages.error %></div>
+          <% } %> <% if (messages.success && messages.success.length > 0) { %>
+          <div class="alert alert-success"><%= messages.success %></div>
+          <% } %>
+
+          <form action="/appointment" method="POST">
+            <div class="form-group">
+              <label for="date">Select Date:</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group mt-4 pt-2">
+              <label>Select Time Slots:</label>
+              <div id="timeSlotsContainer">
+                <% ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+                "12:00", "12:30", "13:00", "13:30", "14:00"].forEach(time => {
+                %>
+                <button
+                  type="button"
+                  class="slot-button m-2"
+                  onclick="selectTimeSlot('<%= time %>')"
+                >
+                  <%= time %>
+                </button>
+                <% }); %>
+              </div>
+              <input type="hidden" id="time" name="time" required />
+              <span id="timeError" class="error-message"></span>
+            </div>
+
+            <button type="submit" class="button mt-3">Add Slot</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <%- include('layouts/footer'); -%>
+
+    <script>
+      // Function to handle time slot selection
+      function selectTimeSlot(time) {
+        // Set the selected time in the hidden input
+        document.getElementById("time").value = time;
+
+        // Remove the active class from previously selected button
+        document
+          .querySelectorAll("#timeSlotsContainer button")
+          .forEach((button) => {
+            button.classList.remove("active-slot");
+          });
+
+        // Add the active class to the currently selected button
+        const selectedButton = Array.from(
+          document.querySelectorAll("#timeSlotsContainer button")
+        ).find((button) => button.innerText === time);
+        if (selectedButton) {
+          selectedButton.classList.add("active-slot");
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const carModel = document.getElementById("carModel").value;
     const carYear = document.getElementById("carYear").value;
     const plateNumber = document.getElementById("plateNumber").value;
+    const appointmentDate = document.getElementById("appointmentDate");
+    const availableSlots = document.getElementById("availableSlots");
 
     // Validate Personal Information
     if (!firstName.trim()) {
@@ -60,6 +62,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!/^[A-Z0-9-]+$/.test(plateNumber)) {
       document.getElementById("plateError").textContent = "Plate number must contain only uppercase letters, numbers, and dashes.";
+      isValid = false;
+    }
+
+    // Validate Appointment Information
+    if (!appointmentDate.value.trim()) {
+      document.getElementById("appointmentDateError").textContent = "Select an appointment date.";
+      isValid = false;
+    }
+
+    if (!availableSlots.value.trim()) {
+      document.getElementById("slotError").textContent = "Select a time slot.";
       isValid = false;
     }
 

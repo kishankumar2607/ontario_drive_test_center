@@ -1,6 +1,9 @@
+
+const Appointment = require("../../models/appointmentModel/appointmentModel");
 const User = require("../../models/userModel/userModel");
 const moment = require('moment');
 const { decrypt } = require("../../utils/encryptDecrypt");
+
 
 // Controller to render the G test booking page and display user data
 exports.getGPage = async (req, res) => {
@@ -27,11 +30,28 @@ exports.getGPage = async (req, res) => {
         // Format the DOB to a human-readable format (e.g., MM/DD/YYYY)
         const formattedDob = moment(user.dob).format('MM/DD/YYYY');
 
+        // Fetch the user's booked appointment, if any
+        const appointment = await Appointment.findOne({ userId: userId }).sort({ date: -1 });
+
+        console.log(appointment);
+        
+
+        let appointmentDetails = null;
+
+        if (appointment) {
+            appointmentDetails = {
+                date: moment(appointment.date).format('MM/DD/YYYY'),
+                time: appointment.time,
+                location: appointment.location,
+            };
+        }
+
         res.render("g_page", {
             title: "G Test Booking | Apply for Your G License Exam",
             user,
             formattedDob,
             decryptedLicenseNumber,
+            appointmentDetails,
         });
     } catch (error) {
         console.error("Error retrieving user:", error);

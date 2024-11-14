@@ -1,7 +1,35 @@
 
+
+const Appointment = require("../../models/appointmentModel/appointmentModel");
 const User = require('../../models/userModel/userModel');
 const moment = require('moment');
 const { encrypt, decrypt } = require('../../utils/encryptDecrypt');
+
+// Retrieve available slots for a given date
+exports.getAvailableSlots = async (req, res) => {
+  const { date } = req.query;
+
+  try {
+    const slots = await Appointment.find({ date, isTimeSlotAvailable: true });
+    res.json(slots);
+  } catch (error) {
+    res.status(500).send("Server error");
+  }
+};
+
+// Book a slot
+exports.bookSlot = async (req, res) => {
+  const userId = req.session.userId;
+  const { appointmentId } = req.body;
+
+  try {
+    await User.findByIdAndUpdate(userId, { appointmentId });
+    await Appointment.findByIdAndUpdate(appointmentId, { isTimeSlotAvailable: false });
+    res.redirect("/g");
+  } catch (error) {
+    res.status(500).send("Server error");
+  }
+};
 
 // Controller to render the G2 test booking page and display user data
 exports.getG2Page = async (req, res) => {

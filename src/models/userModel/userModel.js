@@ -33,7 +33,8 @@ const UserSchema = new Schema({
   },
   userType: {
     type: String,
-    default: 'Driver'
+    enum: ["Driver", "Admin"],
+    default: "Driver"
   },
   dob: {
     type: Date,
