@@ -86,6 +86,10 @@
         <li class="nav-item">
           <a class="nav-link" href="/appointment">Manage Appointments</a>
         </li>
+        <% } %> <% if (loggedIn && userType === 'Admin') { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/slots">Slots</a>
+        </li>
         <% } %> <% if (loggedIn) { %>
         <li class="nav-item">
           <span class="nav-link username-circle"

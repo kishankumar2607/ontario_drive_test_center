@@ -41,3 +41,35 @@ exports.addAppointmentSlot = async (req, res) => {
     }
 };
 
+
+// Display all appointment slots
+exports.getAllSlots = async (req, res) => {
+  try {
+    const appointments = await Appointment.find().sort({ date: 1, time: 1 });
+
+    // Group appointments by date
+    const groupedSlots = appointments.reduce((acc, appointment) => {
+      // Convert appointment.date to a Date object if it's not already
+      const appointmentDate = new Date(appointment.date);
+
+      // Format the date string to a readable format
+      const dateKey = appointmentDate.toDateString();
+
+      // Group by date
+      if (!acc[dateKey]) {
+        acc[dateKey] = [];
+      }
+      acc[dateKey].push(appointment);
+
+      return acc;
+    }, {});
+
+    res.render("slots", {
+      title: "All Appointment Slots",
+      groupedSlots,
+    });
+  } catch (error) {
+    console.error("Error fetching appointment slots:", error);
+    res.status(500).send("Server error");
+  }
+};

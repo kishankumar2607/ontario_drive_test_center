@@ -9,4 +9,7 @@ router.get("/appointment", authMiddleware.isAuthenticated, authMiddleware.isAdmi
 // Admin-only route to add appointment slots
 router.post("/appointment", authMiddleware.isAuthenticated, authMiddleware.isAdmin, appointmentController.addAppointmentSlot);
 
+// Route to display all slots for admins
+router.get("/slots", authMiddleware.isAuthenticated, authMiddleware.isAdmin, appointmentController.getAllSlots);
+
 module.exports = router;
