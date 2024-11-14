@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const appointmentSchema = new Schema({
     date: {
-        type: Date,
+        type: String,
         required: true
     },
     time: {
@@ -14,6 +14,11 @@ const appointmentSchema = new Schema({
     isTimeSlotAvailable: {
         type: Boolean,
         default: true
+    },
+    bookedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        default: null,
     },
 });
 

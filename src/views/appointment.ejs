@@ -47,7 +47,7 @@
           <div class="alert alert-success"><%= messages.success %></div>
           <% } %>
 
-          <form action="/appointment" method="POST">
+          <form id="appointmentForm" action="/appointment" method="POST" novalidate>
             <div class="form-group">
               <label for="date">Select Date:</label>
               <input
@@ -57,10 +57,11 @@
                 class="form-control"
                 required
               />
+              <span id="dateError" class="error-message"></span>
             </div>
             <div class="form-group mt-4 pt-2">
               <label>Select Time Slots:</label>
-              <div id="timeSlotsContainer">
+              <div id="timeSlotsContainer" class="time-slots">
                 <% ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
                 "12:00", "12:30", "13:00", "13:30", "14:00"].forEach(time => {
                 %>
@@ -106,6 +107,21 @@
           selectedButton.classList.add("active-slot");
         }
       }
+
+      document
+        .getElementById("appointmentForm")
+        .addEventListener("submit", function (event) {
+          if (!document.getElementById("date").value) {
+            event.preventDefault();
+            document.getElementById("dateError").textContent =
+              "Please select a date.";
+          }
+          if (!document.getElementById("time").value) {
+            event.preventDefault();
+            document.getElementById("timeError").textContent =
+              "Please select a time slot.";
+          }
+        });
     </script>
   </body>
 </html>

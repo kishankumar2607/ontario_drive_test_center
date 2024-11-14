@@ -30,20 +30,25 @@ exports.getGPage = async (req, res) => {
         // Format the DOB to a human-readable format (e.g., MM/DD/YYYY)
         const formattedDob = moment(user.dob).format('MM/DD/YYYY');
 
-        // Fetch the user's booked appointment, if any
-        const appointment = await Appointment.findOne({ userId: userId }).sort({ date: -1 });
-
-        console.log(appointment);
-        
+        // Fetch the user's booked appointment
+        const bookedAppointment = await Appointment.findById(user.appointmentId);
 
         let appointmentDetails = null;
+        let availableSlots = [];
 
-        if (appointment) {
+        if (bookedAppointment) {
+            // If user has a booked appointment, prepare its details
             appointmentDetails = {
-                date: moment(appointment.date).format('MM/DD/YYYY'),
-                time: appointment.time,
-                location: appointment.location,
+                date: moment(bookedAppointment.date).format("MM/DD/YYYY"),
+                time: bookedAppointment.time,
             };
+        } else {
+            // Fetch available slots for the current date if no appointment is booked
+            const today = moment().format("YYYY-MM-DD");
+            availableSlots = await Appointment.find({
+                date: today,
+                isTimeSlotAvailable: true,
+            }).sort({ time: 1 }); // Sort by time for better display
         }
 
         res.render("g_page", {
@@ -52,6 +57,7 @@ exports.getGPage = async (req, res) => {
             formattedDob,
             decryptedLicenseNumber,
             appointmentDetails,
+            availableSlots,
         });
     } catch (error) {
         console.error("Error retrieving user:", error);
@@ -86,3 +92,4 @@ exports.updateCarInfo = async (req, res) => {
         res.status(500).send("Server error");
     }
 };
+

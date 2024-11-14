@@ -62,6 +62,7 @@ const UserSchema = new Schema({
       default: 'default',
     },
   },
+  appointmentId: { type: mongoose.Schema.Types.ObjectId, ref: "Appointment" },
 });
 
 

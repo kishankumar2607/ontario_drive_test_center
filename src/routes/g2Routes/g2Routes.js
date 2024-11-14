@@ -15,4 +15,7 @@ router.get("/g2/available-slots", authMiddleware.isAuthenticated, authMiddleware
 // Route to handle booking an appointment slot
 router.post("/g2/book-slot", authMiddleware.isAuthenticated, authMiddleware.isDriver, g2Controller.bookSlot);
 
+// Route to delete slot for a given date
+router.post("/g2/delete-appointment", authMiddleware.isAuthenticated, authMiddleware.isDriver, g2Controller.deleteAppointment);
+
 module.exports = router;

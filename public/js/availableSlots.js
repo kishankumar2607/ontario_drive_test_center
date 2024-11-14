@@ -26,4 +26,6 @@ document.getElementById("appointmentDate").addEventListener("change", async func
     document.getElementById("appointmentId").value = appointmentId;
     document.getElementById("bookSlotForm").style.display = "block";
   }
+
+  
   

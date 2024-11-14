@@ -38,18 +38,48 @@
           </p>
 
           <h2 class="text-center mt-4 pt-1">Booked Appointment</h2>
+
           <% if (appointmentDetails) { %>
-          <div class="appointment-info">
-            <p><strong>Date:</strong> <%= appointmentDetails.date %></p>
-            <p><strong>Time:</strong> <%= appointmentDetails.time %></p>
-            <p><strong>Location:</strong> <%= appointmentDetails.location %></p>
-          </div>
+          <p class="pb-2 bigger-text">
+            <strong>Date:</strong> <%= appointmentDetails.date %>
+          </p>
+          <p class="pb-2 bigger-text">
+            <strong>Time:</strong> <%= appointmentDetails.time %>
+          </p>
+
+          <form action="/g2/delete-appointment" method="POST">
+            <input
+              type="hidden"
+              name="appointmentId"
+              value="<%= user.appointmentId %>"
+            />
+            <button type="submit" class="btn btn-danger">
+              Cancel Appointment
+            </button>
+          </form>
+          <% } else { %>
+          <p class="available-slots-g-page pb-3">
+            Available Appointment Slots for Today
+          </p>
+          <% if (availableSlots.length > 0) { %>
+          <form
+            action="/g2/book-slot"
+            method="POST"
+            class="available-slots-g-page-form mt-2"
+          >
+            <label for="slot">Select a Time Slot:</label>
+            <select name="appointmentId" id="slot" required>
+              <% availableSlots.forEach(slot => { %>
+              <option value="<%= slot._id %>"><%= slot.time %></option>
+              <% }) %>
+            </select>
+            <button type="submit" class="button">Book Appointment</button>
+          </form>
           <% } else { %>
           <p class="no-booked-appointment-style">
-            You have no booked appointments.
-            <a href="/g2">Book an appointment here.</a>
+            No slots available for today <a href="/g2">See other dates.</a>
           </p>
-          <% } %>
+          <% } %> <% } %>
 
           <h2 class="text-center mt-4 pt-3">Update Car Information</h2>
           <form id="gForm" action="/g" method="POST">
