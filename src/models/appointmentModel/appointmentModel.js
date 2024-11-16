@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+// Appointment model
 const appointmentSchema = new Schema({
     date: {
         type: String,
@@ -15,12 +16,8 @@ const appointmentSchema = new Schema({
         type: Boolean,
         default: true
     },
-    bookedBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        default: null,
-    },
 });
+
 
 const Appointment = mongoose.model("Appointment", appointmentSchema);
 

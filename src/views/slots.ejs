@@ -8,20 +8,46 @@
     <%- include('layouts/navbar'); -%>
 
     <main>
-      <div class="container mt-4">
-        <h1>All Appointment Slots</h1>
-
-        <% for (let date in groupedSlots) { %>
-        <h2><%= date %></h2>
-        <ul>
-          <% groupedSlots[date].forEach(slot => { %>
-          <li>
-            Time: <%= slot.time %> - Available: <%= slot.isTimeSlotAvailable ?
-            "Yes" : "No" %>
-          </li>
-          <% }) %>
-        </ul>
-        <% } %>
+      <div class="slot-main-div">
+        <div class="container">
+          <h1>All Appointment Slots</h1>
+          <% if (messages && ((messages.success && messages.success.length > 0)
+          || (messages.error && messages.error.length > 0))) { %> <% if
+          (messages.success && messages.success.length > 0) { %>
+          <div class="alert alert-success"><%= messages.success %></div>
+          <% } %> <% if (messages.error && messages.error.length > 0) { %>
+          <div class="alert alert-danger"><%= messages.error %></div>
+          <% } %> <% } %>
+          <div class="slots">
+            <% if (Object.keys(groupedSlots).length === 0) { %>
+            <p>No slots added yet.</p>
+            <form action="/appointment" method="GET" style="display: inline">
+              <button type="submit" class="button">
+                Add New Slot
+              </button>
+            </form>
+            <% } else { %> <% for (let date in groupedSlots) { %>
+            <h2><%= date %></h2>
+            <ul>
+              <% groupedSlots[date].forEach(slot => { %>
+              <li>
+                Time: <%= slot.time %> - Available: <%= slot.isTimeSlotAvailable
+                ? "Yes" : "No" %>
+                <form
+                  action="/appointment/delete/<%= slot._id %>"
+                  method="POST"
+                  style="display: inline"
+                >
+                  <button type="submit" class="btn btn-danger btn-sm mx-2">
+                    Delete
+                  </button>
+                </form>
+              </li>
+              <% }) %>
+            </ul>
+            <% } %> <% } %>
+          </div>
+        </div>
       </div>
     </main>
 

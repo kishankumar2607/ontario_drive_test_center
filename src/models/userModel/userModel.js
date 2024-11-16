@@ -17,7 +17,7 @@ const UserSchema = new Schema({
   licenseNumber: {
     type: String,
     required: true,
-    unique: true,
+    default: "default",
   },
   age: {
     type: Number,
@@ -37,7 +37,7 @@ const UserSchema = new Schema({
     default: "Driver"
   },
   dob: {
-    type: Date,
+    type: String,
     required: true,
   },
   car_details: {

@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 const authController = require('../../controllers/authController/authController');
 
-// Render the Login and Signup pages
+// Render the Login pages
 router.get("/login", authController.renderLoginPage);
+
+// Render the Signup page
 router.get("/register", authController.renderSignupPage);
 
 // Signup Routes

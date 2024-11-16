@@ -13,12 +13,18 @@ const findUserByUsername = async (username) => {
 
 // Render Login Page
 exports.renderLoginPage = (req, res) => {
-  res.render("login", { title: "Login | Access Your Drive Test Account" });
+  res.render("login", {
+    title: "Login | Access Your Drive Test Account",
+    messages: req.flash(),
+  });
 };
 
 // Render Signup Page
 exports.renderSignupPage = (req, res) => {
-  res.render("signup", { title: "Signup | Create Your Drive Test Account" });
+  res.render("signup", {
+    title: "Signup | Create Your Drive Test Account",
+    messages: req.flash(),
+  });
 };
 
 // Handle Signup Form Submission
@@ -27,14 +33,16 @@ exports.signup = async (req, res) => {
 
   // Validate password match
   if (password !== repeatPassword) {
-    return res.status(400).render('signup', { title: 'Signup', message: 'Passwords do not match' });
+    req.flash("error", "Passwords do not match.");
+    return res.redirect("/register");
   }
 
   try {
     // Check if username already exists
     const existingUser = await findUserByUsername(username);
     if (existingUser) {
-      return res.status(400).render('signup', { title: 'Signup', message: 'Username already exists' });
+      req.flash("error", "Username already exists, Please Login.");
+      return res.redirect("/register");
     }
 
     // Hash the password
@@ -62,11 +70,13 @@ exports.signup = async (req, res) => {
     await newUser.save();
 
     // Redirect to login page with success message
-    res.status(200).render('login', { title: 'Sucess', message: 'Registration successful! Please log in.' });
+    req.flash("success", "Registration successful! Please log in.");
+    res.redirect("/login");
 
   } catch (error) {
     console.error("Error during signup:", error);
-    res.status(500).send('Server error');
+    req.flash("error", "An unexpected error occurred during signup.");
+    res.redirect("/register");
   }
 };
 
@@ -78,16 +88,15 @@ exports.login = async (req, res) => {
     const user = await findUserByUsername(username);
 
     if (!user) {
-      return res.status(400).render('login', { title: 'Login', message: 'User not found. Please sign up.' });
-      const validationErrors = Object.keys(error.errors).map(key =>  
-        error.errors[key].message) 
-                   req.flash('validationErrors',validationErrors) 
+      req.flash('error', 'User not found. Please sign up.');
+      return res.redirect('/login');
     }
 
     // Compare the entered password with the hashed password in the database
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).render('login', { title: 'Login', message: 'Invalid credentials.' });
+      req.flash('error', 'Invalid Username and Password.');
+      return res.redirect('/login');
     }
 
     // Set session variables
@@ -101,12 +110,14 @@ exports.login = async (req, res) => {
     // console.log("username: " + req.session.username);
     // console.log("userType: " + req.session.userType);
 
+    req.flash('success', 'Login successful!');
 
     // Redirect based on user type
     res.redirect(user.userType === 'Driver' ? '/g' : '/');
   } catch (error) {
     console.error("Error during login:", error);
-    res.status(500).send('Server error');
+    req.flash('error', 'Server error occurred.');
+    res.redirect('/login');
   }
 };
 

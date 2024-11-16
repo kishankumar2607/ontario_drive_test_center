@@ -17,6 +17,16 @@
             <div class="login-form-container">
               <h2 class="text-center">SignUp</h2>
 
+              <!-- Flash Message Display -->
+              <% if (messages && ((messages.error && messages.error.length > 0)
+              || (messages.success && messages.success.length > 0))) { %> <% if
+              (messages.error && messages.error.length > 0) { %>
+              <div class="alert alert-danger"><%= messages.error[0] %></div>
+              <% } %> <% if (messages.success && messages.success.length > 0) {
+              %>
+              <div class="alert alert-success"><%= messages.success[0] %></div>
+              <% } %> <% } %>
+
               <form
                 class="login-form"
                 id="signupForm"
@@ -65,7 +75,12 @@
 
                 <div class="login-form-group">
                   <label for="UserType" class="user-type">User Type:</label>
-                  <select id="UserType" name="UserType" class="user-type-select" required>
+                  <select
+                    id="UserType"
+                    name="UserType"
+                    class="user-type-select"
+                    required
+                  >
                     <option value="">Select user type</option>
                     <option value="Driver">Driver</option>
                     <option value="Examiner">Examiner</option>
@@ -75,12 +90,12 @@
                 </div>
 
                 <div class="text-center mt-2">
-                  <button type="submit" class="button-login">
-                    Sign Up
-                  </button>
+                  <button type="submit" class="button-login">Sign Up</button>
                 </div>
               </form>
-              <p class="do-not-have-account">Already have an account? <a href="/login">Login in here</a></p>
+              <p class="do-not-have-account">
+                Already have an account? <a href="/login">Login in here</a>
+              </p>
             </div>
           </div>
         </div>
@@ -92,9 +107,9 @@
 
     <!-- Display any server-side validation errors -->
     <% if (typeof message !== 'undefined') { %>
-      <script>
-        alert("<%= message %>");
-      </script>
+    <script>
+      alert("<%= message %>");
+    </script>
     <% } %>
 
     <!-- Validation Script -->

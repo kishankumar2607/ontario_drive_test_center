@@ -12,4 +12,7 @@ router.post("/appointment", authMiddleware.isAuthenticated, authMiddleware.isAdm
 // Route to display all slots for admins
 router.get("/slots", authMiddleware.isAuthenticated, authMiddleware.isAdmin, appointmentController.getAllSlots);
 
+// Admin-only route to delete an appointment slot by ID
+router.post("/appointment/delete/:id", authMiddleware.isAuthenticated, authMiddleware.isAdmin, appointmentController.deleteSlot);
+
 module.exports = router;

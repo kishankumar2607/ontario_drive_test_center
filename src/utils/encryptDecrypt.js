@@ -1,7 +1,7 @@
 const CryptoJS = require("crypto-js");
 
-// The secret key for encryption/decryption (store securely in environment variables)
-const secretKey = process.env.SECRET_KEY; // Replace with a secure key
+// The secret key for encryption/decryption
+const secretKey = process.env.SECRET_KEY;
 
 // Encrypt function
 function encrypt(text) {

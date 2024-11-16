@@ -28,7 +28,7 @@ exports.getGPage = async (req, res) => {
         }
 
         // Format the DOB to a human-readable format (e.g., MM/DD/YYYY)
-        const formattedDob = moment(user.dob).format('MM/DD/YYYY');
+        const formattedDob = moment(user.dob).format('DD/MM/YYYY');
 
         // Fetch the user's booked appointment
         const bookedAppointment = await Appointment.findById(user.appointmentId);
@@ -39,7 +39,7 @@ exports.getGPage = async (req, res) => {
         if (bookedAppointment) {
             // If user has a booked appointment, prepare its details
             appointmentDetails = {
-                date: moment(bookedAppointment.date).format("MM/DD/YYYY"),
+                date: moment(bookedAppointment.date).format("DD/MM/YYYY"),
                 time: bookedAppointment.time,
             };
         } else {
@@ -48,7 +48,7 @@ exports.getGPage = async (req, res) => {
             availableSlots = await Appointment.find({
                 date: today,
                 isTimeSlotAvailable: true,
-            }).sort({ time: 1 }); // Sort by time for better display
+            }).sort({ time: 1 });
         }
 
         res.render("g_page", {

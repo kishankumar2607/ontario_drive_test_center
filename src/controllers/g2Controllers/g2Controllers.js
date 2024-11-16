@@ -1,9 +1,9 @@
 
-
 const Appointment = require("../../models/appointmentModel/appointmentModel");
 const User = require('../../models/userModel/userModel');
 const moment = require('moment');
 const { encrypt, decrypt } = require('../../utils/encryptDecrypt');
+const { mongoose } = require("mongoose");
 
 
 // Controller to render the G2 test booking page and display user data
@@ -25,6 +25,7 @@ exports.getG2Page = async (req, res) => {
       title: "G2 Test Booking | Schedule Your G2 License Test",
       user: user && user.licenseNumber !== "default" ? user : null,
       buttonText: user && user.licenseNumber !== "default" ? "Update Information" : "Submit Request",
+      messages: req.flash(),
     });
 
   } catch (error) {
@@ -65,6 +66,20 @@ exports.postG2Booking = async (req, res) => {
   const formattedDob = moment(dob).isValid() ? moment(dob).format("YYYY-MM-DD") : null;
   const age = formattedDob ? moment().diff(moment(formattedDob), "years") : null;
 
+  // Check if appointmentId is valid
+  const validAppointmentId =
+    appointmentId && mongoose.Types.ObjectId.isValid(appointmentId)
+      ? appointmentId
+      : null;
+
+  if (licenseNumber !== "default") {
+    const existingUser = await User.findOne({ licenseNumber });
+    if (existingUser && existingUser._id.toString() !== userId) {
+      req.flash("error", "This license number is already in use.");
+      return res.redirect("/g2");
+    }
+  }
+
   // Encrypt licenseNumber before storing it in the database
   const encryptedLicense = encrypt(licenseNumber);
 
@@ -82,11 +97,15 @@ exports.postG2Booking = async (req, res) => {
         year,
         plateNumber,
       },
-      appointmentId, // Store the appointment ID in the user document
+      appointmentId: validAppointmentId,
     });
 
     // Mark the selected appointment slot as unavailable
-    await Appointment.findByIdAndUpdate(appointmentId, { isTimeSlotAvailable: false });
+    if (validAppointmentId) {
+      await Appointment.findByIdAndUpdate(validAppointmentId, {
+        isTimeSlotAvailable: false,
+      });
+    }
 
     res.redirect("/g");
   } catch (error) {

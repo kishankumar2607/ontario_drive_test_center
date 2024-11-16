@@ -66,22 +66,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Validate Appointment Information
-    if (!appointmentDate.value.trim()) {
-      document.getElementById("appointmentDateError").textContent = "Select an appointment date.";
-      isValid = false;
-    }
+    // if (!appointmentDate.value.trim()) {
+    //   document.getElementById("appointmentDateError").textContent = "Select an appointment date.";
+    //   isValid = false;
+    // }
 
-    if (!availableSlots.value.trim()) {
-      document.getElementById("slotError").textContent = "Select a time slot.";
-      isValid = false;
-    }
+    // if (!availableSlots.value.trim()) {
+    //   document.getElementById("slotError").textContent = "Select a time slot.";
+    //   isValid = false;
+    // }
 
     // Final check
     if (!isValid) {
       console.log("Form validation failed");
     } else {
       console.log("Form validated successfully");
-      alert("Your request has been submitted successfully!");
+      // alert("Your request has been submitted successfully!");
       g2Form.submit();
     }
   });

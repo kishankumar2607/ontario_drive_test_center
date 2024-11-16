@@ -637,27 +637,37 @@ input:focus {
 }
 
 
-/* All slots available style */
+/* slots available style */
+.slot-main-div{
+height: 100vh;
+width: 100%;
+margin-top: 100px;
+margin-bottom: 80px;
+}
 
-.slot-container {
-  margin-top: 2rem;
-  padding: 1rem;
-  border-bottom: 1px solid #ccc;
+.slot-main-div h1{
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  padding: 2rem 0rem;
 }
-.date-title {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 0.5rem;
+
+.slots h2{
+  font-size: 28px;
+  font-weight: 700;
+  padding: 10px 0px;
+  color: #ff0000;
 }
-.time-slot {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  background-color: #f0f0f0;
-  margin: 0.25rem;
+
+.slots p{
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
 }
-.booked-slot {
-  background-color: #ddd;
-  color: #888;
+
+.slots ul li{
+  list-style: decimal;
+  margin-bottom: 1rem;
+  font-size: 22px;
+  font-weight: 600;
 }

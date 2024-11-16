@@ -21,7 +21,8 @@ document.getElementById("appointmentDate").addEventListener("change", async func
       });
     }
   });
-  
+
+  // Book an appointment slot when the book button is clicked
   function selectSlot(appointmentId) {
     document.getElementById("appointmentId").value = appointmentId;
     document.getElementById("bookSlotForm").style.display = "block";
