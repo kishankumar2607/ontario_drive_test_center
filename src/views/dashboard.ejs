@@ -21,6 +21,10 @@
           <h1 style="font-size: 40px">Hello Admin <%= username %></h1>
           <h1>Welcome to Your Admin Portal!</h1>
           <h3>Manage your users and test schedules.</h3>
+          <% } %> <% if (loggedIn && userType === 'Examiner') { %>
+          <h1 style="font-size: 40px">Hello Examiner <%= username %></h1>
+          <h1>Welcome to Your Examiner Portal!</h1>
+          <h3>View and manage test appointments.</h3>
           <% } %> <% if (!loggedIn) { %>
           <h1>Welcome to the Driving Test Portal</h1>
           <h3>Login or Register to book and manage driving tests</h3>

@@ -8,23 +8,40 @@ const { mongoose } = require("mongoose");
 
 // Controller to render the G2 test booking page and display user data
 exports.getG2Page = async (req, res) => {
-
   const userId = req.session.userId;
 
-  // console.log("user id in get method in g2 controller: " + userId);
-
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate("appointmentId");
 
     if (user && user.licenseNumber !== "default") {
       // Decrypt the licenseNumber
       user.licenseNumber = decrypt(user.licenseNumber);
     }
 
+    let appointmentDetails = null;
+    let availableSlots = [];
+
+    if (user && user.appointmentId) {
+      // User has a booked appointment
+      appointmentDetails = {
+        date: moment(user.appointmentId.date).format("DD/MM/YYYY"),
+        time: user.appointmentId.time,
+      };
+    } else {
+      // Fetch available slots for today if no appointment is booked
+      const today = moment().format("YYYY-MM-DD");
+      availableSlots = await Appointment.find({
+        date: today,
+        isTimeSlotAvailable: true,
+      }).sort({ time: 1 });
+    }
+
     res.render("g2_page", {
       title: "G2 Test Booking | Schedule Your G2 License Test",
       user: user && user.licenseNumber !== "default" ? user : null,
       buttonText: user && user.licenseNumber !== "default" ? "Update Information" : "Submit Request",
+      appointmentDetails,
+      availableSlots,
       messages: req.flash(),
     });
 
@@ -98,6 +115,7 @@ exports.postG2Booking = async (req, res) => {
         plateNumber,
       },
       appointmentId: validAppointmentId,
+      testType: "G2",
     });
 
     // Mark the selected appointment slot as unavailable
@@ -107,7 +125,7 @@ exports.postG2Booking = async (req, res) => {
       });
     }
 
-    res.redirect("/g");
+    res.redirect("/g2");
   } catch (error) {
     console.error("Error updating user G2 booking data and booking slot:", error);
     res.status(500).send("Server error");
@@ -127,7 +145,7 @@ exports.bookSlot = async (req, res) => {
     // Update the Appointment record to mark the slot as unavailable
     await Appointment.findByIdAndUpdate(appointmentId, { isTimeSlotAvailable: false });
 
-    res.redirect("/g");
+    res.redirect("/g2");
   } catch (error) {
     console.error("Error booking appointment:", error);
     res.status(500).send("Server error");
@@ -147,7 +165,7 @@ exports.deleteAppointment = async (req, res) => {
     // Mark the appointment slot as available
     await Appointment.findByIdAndUpdate(appointmentId, { isTimeSlotAvailable: true });
 
-    res.redirect("/g");
+    res.redirect("/g2");
   } catch (error) {
     console.error("Error deleting appointment:", error);
     res.status(500).send("Server error");

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('layouts/header'); -%>
+  <body>
+    <%- include('layouts/navbar'); -%>
+
+    <main class="container status-main-div">
+      <h1>Manage Pass/Fail Candidates</h1>
+
+      <!-- Flash Messages -->
+      <% if (messages.success && messages.success.length > 0) { %>
+      <div class="alert alert-success"><%= messages.success %></div>
+      <% } %>
+      <% if (messages.error && messages.error.length > 0) { %>
+      <div class="alert alert-danger"><%= messages.error %></div>
+      <% } %>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Car Details</th>
+            <th>Test Type</th>
+            <th>Pass/Fail</th>
+            <th>Comment</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% candidates.forEach(candidate => { %>
+          <tr>
+            <td><%= candidate.firstName %> <%= candidate.lastName %></td>
+            <td>
+              <%= candidate.car_details.make %> <%= candidate.car_details.model %>
+              (<%= candidate.car_details.year %>)
+            </td>
+            <td><%= candidate.testType %></td>
+            <td><%= candidate.passFail ? "Pass" : "Fail" %></td>
+            <td><%= candidate.comment || "No comments yet" %></td>
+            <td>
+              <form method="POST" action="/status/update" class="status-main-div-form">
+                <input type="hidden" name="driverId" value="<%= candidate._id %>" />
+                <select name="passFail" required>
+                  <option value="true" <%= candidate.passFail === true ? 'selected="selected"' : "" %>>
+                    Pass
+                  </option>
+                  <option value="false" <%= candidate.passFail === false ? 'selected="selected"' : "" %>>
+                    Fail
+                  </option>
+                </select>
+                <textarea name="comment" placeholder="Add comment" required><%= candidate.comment %></textarea>
+                <button type="submit" class="button">Update</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </main>
+
+    <%- include('layouts/footer'); -%>
+  </body>
+</html>

@@ -47,7 +47,12 @@
           <div class="alert alert-success"><%= messages.success %></div>
           <% } %>
 
-          <form id="appointmentForm" action="/appointment" method="POST" novalidate>
+          <form
+            id="appointmentForm"
+            action="/appointment"
+            method="POST"
+            novalidate
+          >
             <div class="form-group">
               <label for="date">Select Date:</label>
               <input
@@ -56,6 +61,7 @@
                 name="date"
                 class="form-control"
                 required
+                min="<%= new Date().toISOString().split('T')[0] %>"
               />
               <span id="dateError" class="error-message"></span>
             </div>
@@ -103,6 +109,7 @@
         const selectedButton = Array.from(
           document.querySelectorAll("#timeSlotsContainer button")
         ).find((button) => button.innerText === time);
+        
         if (selectedButton) {
           selectedButton.classList.add("active-slot");
         }

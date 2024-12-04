@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./layouts/header'); -%>
+    <title>Drive Test Management</title>
+  </head>
+  <body>
+    <%- include('./layouts/navbar'); -%>
+    <div class="container examiner-main-div">
+      <h1>Drive Test Management</h1>
+
+      <!-- Flash Messages -->
+      <% if (messages.error && messages.error.length > 0) { %>
+      <div class="alert alert-danger"><%= messages.error %></div>
+      <% } %>
+      <% if (messages.success && messages.success.length > 0) { %>
+      <div class="alert alert-success"><%= messages.success %></div>
+      <% } %>
+
+      <div>
+        <!-- Filter Form -->
+        <div class="filter-container">
+          <form method="GET" action="/examiner">
+            <label for="filter">Filter by Test Type:</label>
+            <select id="filter" name="filter">
+              <option value="">All</option>
+              <option value="G2" <%= filter === "G2" ? "selected" : "" %>>G2</option>
+              <option value="G" <%= filter === "G" ? "selected" : "" %>>G</option>
+            </select>
+            <button type="submit" class="button mx-3">Filter</button>
+          </form>
+        </div>
+
+        <!-- Driver List Table -->
+        <table class="examiner-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Car Details</th>
+              <th>Test Type</th>
+              <th>Comment</th>
+              <th>Pass/Fail</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% drivers.forEach(driver => { %>
+            <tr>
+              <td><%= driver.firstName %> <%= driver.lastName %></td>
+              <td>
+                <%= driver.car_details.make %> <%= driver.car_details.model %>
+                (<%= driver.car_details.year %>)
+              </td>
+              <td><%= driver.testType %></td>
+              <td><%= driver.comment || "No comments yet" %></td>
+              <td>
+                <%= driver.passFail === null
+                  ? "Not Tested"
+                  : driver.passFail
+                  ? "Pass"
+                  : "Fail" %>
+              </td>
+              <td>
+                <form method="POST" action="/examiner/update" class="examiner-form">
+                  <input type="hidden" name="driverId" value="<%= driver._id %>" />
+                  <textarea name="comment" placeholder="Add comment" class="examiner-textarea"><%= driver.comment %></textarea>
+                  <div class="examiner-update">
+                    <select name="passFail">
+                      <option value="true" <%= driver.passFail === true ? "selected" : "" %>>
+                        Pass
+                      </option>
+                      <option value="false" <%= driver.passFail === false ? "selected" : "" %>>
+                        Fail
+                      </option>
+                    </select>
+                    <button type="submit" class="button">Update</button>
+                  </div>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%- include('./layouts/footer'); -%>
+  </body>
+</html>

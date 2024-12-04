@@ -33,7 +33,7 @@ const UserSchema = new Schema({
   },
   userType: {
     type: String,
-    enum: ["Driver", "Admin"],
+    enum: ["Driver", "Admin", "Examiner"],
     default: "Driver"
   },
   dob: {
@@ -62,7 +62,23 @@ const UserSchema = new Schema({
       default: 'default',
     },
   },
-  appointmentId: { type: mongoose.Schema.Types.ObjectId, ref: "Appointment" },
+  testType: {
+    type: String,
+    enum: ['G2', 'G'],
+    default: null,
+  },
+  comment: {
+    type: String,
+    default: '',
+  },
+  passFail: {
+    type: Boolean,
+    default: null,
+  },
+  appointmentId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Appointment" 
+  },
 });
 
 

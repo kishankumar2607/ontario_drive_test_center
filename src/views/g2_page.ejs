@@ -205,6 +205,78 @@
                   </select>
                   <span id="slotError" class="error-message"></span>
                 </div>
+
+                <section class="container">
+                  <div class="g2-appointment">
+                    <% if (appointmentDetails) { %>
+                    <h3>Your Booked Appointment</h3>
+                    <p><strong>Date:</strong> <%= appointmentDetails.date %></p>
+                    <p><strong>Time:</strong> <%= appointmentDetails.time %></p>
+                    <button
+                      type="button"
+                      class="btn btn-danger mt-3"
+                      data-bs-toggle="modal"
+                      data-bs-target="#cancelAppointmentModal"
+                    >
+                      Cancel Appointment
+                    </button>
+
+                    <!-- Cancel Appointment Modal -->
+                    <div
+                      class="modal fade"
+                      id="cancelAppointmentModal"
+                      tabindex="-1"
+                      aria-labelledby="cancelAppointmentModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5
+                              class="modal-title"
+                              id="cancelAppointmentModalLabel"
+                            >
+                              Cancel Appointment
+                            </h5>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            Are you sure you want to cancel this appointment?
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              No
+                            </button>
+                            <form action="/g2/delete-appointment" method="POST">
+                              <input
+                                type="hidden"
+                                name="appointmentId"
+                                value="<%= user.appointmentId %>"
+                              />
+                              <button type="submit" class="btn btn-danger">
+                                Yes
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <% } else { %>
+                    <p class="available-slots-g-page pb-1">
+                      You currently have no booked appointments.
+                    </p>
+                    <% } %>
+                  </div>
+                </section>
               </div>
             </div>
 

@@ -113,7 +113,8 @@ exports.login = async (req, res) => {
     req.flash('success', 'Login successful!');
 
     // Redirect based on user type
-    res.redirect(user.userType === 'Driver' ? '/g' : '/');
+    // res.redirect(user.userType === 'Driver' ? '/g' : '/');
+    res.redirect('/');
   } catch (error) {
     console.error("Error during login:", error);
     req.flash('error', 'Server error occurred.');

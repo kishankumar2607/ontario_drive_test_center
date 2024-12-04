@@ -1,22 +1,38 @@
 const Appointment = require("../../models/appointmentModel/appointmentModel");
+const User = require("../../models/userModel/userModel");
 const moment = require("moment");
 
 
 // Render the appointment management page
 exports.getAppointmentPage = async (req, res) => {
-  const date = req.query.date || new Date().toISOString().slice(0, 10);
 
-  const appointments = await Appointment.find({ date }).sort({ time: 1 });
+  const { date } = req.query;
+  const selectedDate = date || new Date().toISOString().split('T')[0];
 
-  res.render("appointment", {
-    title: "Manage Appointments",
-    appointments,
-    messages: {
-      error: req.flash('error'),
-      success: req.flash('success')
-    }
-  });
+  try {
+    // Fetch all booked slots for the selected date
+    const appointments = await Appointment.find({ date: selectedDate });
+    const bookedSlots = appointments.map((appointment) => appointment.time);
+
+    console.log("appointments slots", appointments);
+    console.log("Booked slots", bookedSlots);
+      
+    res.render("appointment", {
+      title: "Manage Appointments",
+      appointments,
+      bookedSlots,
+      messages: {
+        error: req.flash("error"),
+        success: req.flash("success"),
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching appointment page:", error);
+    req.flash("error", "Failed to load appointments.");
+    res.redirect("/");
+  }
 };
+
 
 // Handle the addition of new appointment slots
 exports.addAppointmentSlot = async (req, res) => {
@@ -57,7 +73,7 @@ exports.addAppointmentSlot = async (req, res) => {
 // Display all appointment slots, removing past slots
 exports.getAllSlots = async (req, res) => {
   try {
-    
+
     const today = moment().startOf("day");
 
     // Delete all appointments that are strictly before today's date
@@ -108,5 +124,45 @@ exports.deleteSlot = async (req, res) => {
     console.error("Error deleting appointment slot:", error);
     req.flash("error", "Failed to delete appointment slot.");
     res.redirect("/slots");
+  }
+};
+
+
+// Admin: View Pass/Fail Candidates
+exports.viewPassFailCandidates = async (req, res) => {
+  try {
+    const candidates = await User.find(
+      { userType: "Driver", passFail: { $ne: null } },
+      "firstName lastName car_details testType passFail comment"
+    );
+
+    res.render("status", {
+      title: "Manage Pass/Fail Candidates",
+      candidates,
+      messages: req.flash(),
+    });
+  } catch (error) {
+    console.error("Error fetching pass/fail candidates:", error);
+    req.flash("error", "Failed to load candidates.");
+    res.redirect("/");
+  }
+};
+
+// Admin: Update Driver Test Result
+exports.updateDriverTestResult = async (req, res) => {
+  const { driverId, passFail, comment } = req.body;
+
+  try {
+    await User.findByIdAndUpdate(driverId, {
+      passFail: passFail === "true", // Convert string to boolean
+      comment,
+    });
+
+    req.flash("success", "Driver test result updated successfully.");
+    res.redirect("/status");
+  } catch (error) {
+    console.error("Error updating driver test result:", error);
+    req.flash("error", "Failed to update test result.");
+    res.redirect("/status");
   }
 };

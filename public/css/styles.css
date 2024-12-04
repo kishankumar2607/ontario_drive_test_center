@@ -445,6 +445,18 @@ input:focus {
   font-weight: bold;
 }
 
+.g2-appointment h3{
+  font-weight: 700;
+  text-align: center;
+  margin-top: 2.5rem;
+  color: #ff0000;
+}
+
+.g2-appointment p{
+  font-size: 20px;
+  padding-top: 0.5rem;
+}
+
 /* G Page Style */
 
 .g-page-main-div-style {
@@ -499,19 +511,19 @@ input:focus {
   font-weight: 600;
 }
 
-.available-slots-g-page-form label{
+.available-slots-g-page-form label {
   font-size: 1.2rem;
   font-weight: 600;
   padding-right: 0.3rem;
 }
 
-.available-slots-g-page-form select{
+.available-slots-g-page-form select {
   border: 2px solid #000000;
   border-radius: 5px;
   padding: 0.5rem 1rem;
   margin-right: 1rem;
   font-size: 1.2rem;
-  font-weight: 700
+  font-weight: 700;
 }
 /* no user page css */
 
@@ -636,38 +648,263 @@ input:focus {
   margin-bottom: 2rem;
 }
 
-
 /* slots available style */
-.slot-main-div{
-height: 100vh;
-width: 100%;
-margin-top: 100px;
-margin-bottom: 80px;
+.slot-main-div {
+  height: 100vh;
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 80px;
 }
 
-.slot-main-div h1{
+.slot-main-div h1 {
   font-size: 40px;
   font-weight: 700;
   text-align: center;
   padding: 2rem 0rem;
 }
 
-.slots h2{
+.slots h2 {
   font-size: 28px;
   font-weight: 700;
   padding: 10px 0px;
   color: #ff0000;
 }
 
-.slots p{
+.slots p {
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 1.5rem;
 }
 
-.slots ul li{
+.slots ul li {
   list-style: decimal;
   margin-bottom: 1rem;
   font-size: 22px;
   font-weight: 600;
+}
+
+.slot-button.disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  border-color: #ccc;
+}
+
+/* Examiner page design */
+
+.examiner-main-div {
+  margin-top: 90px;
+  padding: 2.5rem 0rem;
+  height: 90vh;
+}
+
+.examiner-main-div h1 {
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  padding: 1.5rem 0rem 3rem 0rem;
+}
+
+.filter-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-container select {
+  width: 100px;
+  border: 2px solid #ff0000;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.examiner-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.examiner-table th,
+.examiner-table td {
+  border: 2px solid #000000 !important;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: left;
+}
+
+.examiner-table th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.examiner-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.examiner-table tbody tr:hover {
+  background-color: #f0f1f8;
+}
+
+.examiner-textarea {
+  width: 100%;
+  height: 60px;
+  border: 1px solid #ff0000;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.examiner-update{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.examiner-update select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ff0000;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.examiner-form {
+  margin-bottom: 0;
+  width: 100%;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Status Page design */
+
+.status-main-div {
+  margin-top: 80px;
+  padding: 3rem 0rem;
+  height: 90vh;
+}
+
+.status-main-div h1 {
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  padding: 2rem 0rem;
+}
+
+.status-main-div-form{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-main-div-form select{
+  padding: 10px;
+  border: 1px solid #ff0000;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.status-main-div-form textarea{
+  width: 100%;
+  height: 60px;
+  border: 1px solid #ff0000;
+  border-radius: 4px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+/* Slots booking style */
+
+.slots-container {
+  height: 90vh;
+  margin-top: 80px;
+  background-color: #f9f9f9;
+  padding: 3rem 0rem;
+}
+
+.header-section h1 {
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 0rem;
+}
+
+.header-section h4 {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.date-selection {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.date-selection label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.date-selection input {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.slot-card {
+  padding: 1rem;
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.slot-card:hover {
+  transform: scale(1.05);
+}
+
+.slot-card p {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.no-slots {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #555;
 }

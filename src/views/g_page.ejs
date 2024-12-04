@@ -88,7 +88,7 @@
                   >
                     No
                   </button>
-                  <form action="/g2/delete-appointment" method="POST">
+                  <form action="/g/cancel-appointment" method="POST">
                     <input
                       type="hidden"
                       name="appointmentId"
@@ -109,7 +109,7 @@
           </p>
           <% if (availableSlots.length > 0) { %>
           <form
-            action="/g2/book-slot"
+            action="/g/book-slot"
             method="POST"
             class="available-slots-g-page-form mt-2"
           >
@@ -123,7 +123,7 @@
           </form>
           <% } else { %>
           <p class="no-booked-appointment-style">
-            No slots available for today <a href="/g2">See other dates.</a>
+            No slots available for today <a href="/slots-booking">See other dates.</a>
           </p>
           <% } %> <% } %>
 
