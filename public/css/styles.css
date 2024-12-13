@@ -695,7 +695,8 @@ input:focus {
 .examiner-main-div {
   margin-top: 90px;
   padding: 2.5rem 0rem;
-  height: 90vh;
+  height: 100vh;
+  margin-bottom: 2rem;
 }
 
 .examiner-main-div h1 {

@@ -137,12 +137,12 @@ exports.viewPassFailCandidates = async (req, res) => {
     );
 
     res.render("status", {
-      title: "Manage Pass/Fail Candidates",
+      title: "Manage License Issuance",
       candidates,
       messages: req.flash(),
     });
   } catch (error) {
-    console.error("Error fetching pass/fail candidates:", error);
+    console.error("Error fetching License Issuance:", error);
     req.flash("error", "Failed to load candidates.");
     res.redirect("/");
   }

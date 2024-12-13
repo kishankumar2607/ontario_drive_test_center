@@ -88,7 +88,7 @@ exports.login = async (req, res) => {
     const user = await findUserByUsername(username);
 
     if (!user) {
-      req.flash('error', 'User not found. Please sign up.');
+      req.flash('error', 'User not found. Please Register.');
       return res.redirect('/login');
     }
 

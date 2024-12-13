@@ -201,22 +201,6 @@ exports.viewAvailableSlots = async (req, res) => {
 };
 
 
-//Get all slots
-exports.getAvailableSlots = async (req, res) => {
-    const { date } = req.query;
-
-    try {
-        const slots = await Appointment.find({ date, isTimeSlotAvailable: true });
-        console.log("Available slots:", slots); // Debugging log
-        res.json(slots);
-    } catch (error) {
-        console.error("Error fetching slots:", error);
-        res.status(500).json({ error: "Failed to fetch slots" });
-    }
-};
-
-
-
 // Retrieve available slots for a given date
 exports.getAvailableSlots = async (req, res) => {
     const { date } = req.query;
@@ -225,6 +209,7 @@ exports.getAvailableSlots = async (req, res) => {
         const slots = await Appointment.find({ date, isTimeSlotAvailable: true });
         res.json(slots);
     } catch (error) {
+        console.error("Error fetching slots:", error);
         res.status(500).send("Server error");
     }
 };

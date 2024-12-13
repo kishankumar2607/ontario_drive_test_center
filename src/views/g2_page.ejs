@@ -208,7 +208,18 @@
 
                 <section class="container">
                   <div class="g2-appointment">
-                    <% if (appointmentDetails) { %>
+                    <% if (user && user.passFail !== null) { %>
+                    <!-- Show Test Result -->
+                    <h2 class="text-center mt-4 pt-1">Test Result</h2>
+                    <p class="pb-2 bigger-text">
+                      <strong>Status:</strong> <%= user.passFail ? "Pass" :
+                      "Fail" %>
+                    </p>
+                    <p class="pb-2 bigger-text">
+                      <strong>Examiner's Comment:</strong> <%= user.comment ||
+                      "No comments provided." %>
+                    </p>
+                    <% } else { %> <% if (appointmentDetails) { %>
                     <h3>Your Booked Appointment</h3>
                     <p><strong>Date:</strong> <%= appointmentDetails.date %></p>
                     <p><strong>Time:</strong> <%= appointmentDetails.time %></p>
@@ -274,7 +285,7 @@
                     <p class="available-slots-g-page pb-1">
                       You currently have no booked appointments.
                     </p>
-                    <% } %>
+                    <% } %> <% } %>
                   </div>
                 </section>
               </div>

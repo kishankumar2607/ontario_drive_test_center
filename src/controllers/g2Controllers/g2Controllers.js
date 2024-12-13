@@ -159,12 +159,15 @@ exports.deleteAppointment = async (req, res) => {
   const { appointmentId } = req.body;
 
   try {
+    // Mark the appointment slot as available
+    await Appointment.findByIdAndUpdate(appointmentId, {
+      isTimeSlotAvailable: true,
+    });
+
     // Remove the appointment from the user record
     await User.findByIdAndUpdate(userId, { $unset: { appointmentId: "" } });
 
-    // Mark the appointment slot as available
-    await Appointment.findByIdAndUpdate(appointmentId, { isTimeSlotAvailable: true });
-
+    req.flash("success", "Appointment canceled successfully.");
     res.redirect("/g2");
   } catch (error) {
     console.error("Error deleting appointment:", error);

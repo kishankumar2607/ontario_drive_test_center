@@ -37,6 +37,16 @@
             <strong>Date of Birth:</strong> <%= formattedDob %>
           </p>
 
+          <% if (user && user.passFail !== null) { %>
+          <!-- Show Test Result -->
+          <h2 class="text-center mt-4 pt-1">Test Result</h2>
+          <p class="pb-2 bigger-text">
+            <strong>Status:</strong> <%= user.passFail ? "Pass" : "Fail" %>
+          </p>
+          <p class="pb-2 bigger-text">
+            <strong>Examiner's Comment:</strong> <%= user.comment || "No comments provided." %>
+          </p>
+          <% } else { %>
           <h2 class="text-center mt-4 pt-1">Booked Appointment</h2>
 
           <% if (appointmentDetails) { %>
@@ -123,9 +133,10 @@
           </form>
           <% } else { %>
           <p class="no-booked-appointment-style">
-            No slots available for today <a href="/slots-booking">See other dates.</a>
+            No slots available for today
+            <a href="/slots-booking">See other dates.</a>
           </p>
-          <% } %> <% } %>
+          <% } %> <% } %> <% } %>
 
           <h2 class="text-center mt-4 pt-3">Update Car Information</h2>
           <form id="gForm" action="/g" method="POST">

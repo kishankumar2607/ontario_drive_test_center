@@ -5,7 +5,7 @@
     <%- include('layouts/navbar'); -%>
 
     <main class="container status-main-div">
-      <h1>Manage Pass/Fail Candidates</h1>
+      <h1>Manage Pass/Fail Candidates for License Issuance</h1>
 
       <!-- Flash Messages -->
       <% if (messages.success && messages.success.length > 0) { %>
@@ -23,7 +23,7 @@
             <th>Test Type</th>
             <th>Pass/Fail</th>
             <th>Comment</th>
-            <th>Action</th>
+            <!-- <th>Action</th> -->
           </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
             <td><%= candidate.testType %></td>
             <td><%= candidate.passFail ? "Pass" : "Fail" %></td>
             <td><%= candidate.comment || "No comments yet" %></td>
-            <td>
+            <!-- <td>
               <form method="POST" action="/status/update" class="status-main-div-form">
                 <input type="hidden" name="driverId" value="<%= candidate._id %>" />
                 <select name="passFail" required>
@@ -51,7 +51,7 @@
                 <textarea name="comment" placeholder="Add comment" required><%= candidate.comment %></textarea>
                 <button type="submit" class="button">Update</button>
               </form>
-            </td>
+            </td> -->
           </tr>
           <% }) %>
         </tbody>
