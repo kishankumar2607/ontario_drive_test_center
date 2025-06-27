@@ -2,9 +2,9 @@
 const express = require('express');
 const dotenv = require("dotenv");
 dotenv.config();
-require("./helpers/connection")
+require("../src/helpers/connection");
 const app = express();
-const server = require("./server")
+const server = require("../src/server")
 
 app.use(server);
 
